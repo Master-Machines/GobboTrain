@@ -1,0 +1,343 @@
+fileFormatVersion: 2
+guid: e8790215c1104c94693cc4b2e05b3b26
+timeCreated: 1440379562
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: chest
+    100002: goblinBody
+    100004: head
+    100006: leftAnkle
+    100008: leftElbow
+    100010: leftEye
+    100012: leftFoot
+    100014: leftHand
+    100016: leftHip
+    100018: leftKnee
+    100020: leftLeg
+    100022: leftShoulder
+    100024: leftToe
+    100026: leftWrist
+    100028: loinCloth
+    100030: loinClothRetop:waistController
+    100032: lowerTeeth
+    100034: neck
+    100036: rightAnkle
+    100038: rightElbow
+    100040: rightEye
+    100042: rightFoot
+    100044: rightHand
+    100046: rightHip
+    100048: rightKnee
+    100050: rightLeg
+    100052: rightShoulder
+    100054: rightToe
+    100056: rightWrist
+    100058: root
+    100060: scalp
+    100062: upperTeeth
+    100064: //RootNode
+    400000: chest
+    400002: goblinBody
+    400004: head
+    400006: leftAnkle
+    400008: leftElbow
+    400010: leftEye
+    400012: leftFoot
+    400014: leftHand
+    400016: leftHip
+    400018: leftKnee
+    400020: leftLeg
+    400022: leftShoulder
+    400024: leftToe
+    400026: leftWrist
+    400028: loinCloth
+    400030: loinClothRetop:waistController
+    400032: lowerTeeth
+    400034: neck
+    400036: rightAnkle
+    400038: rightElbow
+    400040: rightEye
+    400042: rightFoot
+    400044: rightHand
+    400046: rightHip
+    400048: rightKnee
+    400050: rightLeg
+    400052: rightShoulder
+    400054: rightToe
+    400056: rightWrist
+    400058: root
+    400060: scalp
+    400062: upperTeeth
+    400064: //RootNode
+    2300000: leftEye
+    2300002: lowerTeeth
+    2300004: rightEye
+    2300006: upperTeeth
+    3300000: leftEye
+    3300002: lowerTeeth
+    3300004: rightEye
+    3300006: upperTeeth
+    4300000: goblinBody
+    4300002: leftLeg
+    4300004: loinCloth
+    4300006: rightLeg
+    4300008: rightEye
+    4300010: leftEye
+    4300012: lowerTeeth
+    4300014: upperTeeth
+    7400000: Run
+    7400002: pickup
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: goblinBody
+    13700002: leftLeg
+    13700004: loinCloth
+    13700006: rightLeg
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 2
+      lastFrame: 39
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: goblinBody
+        weight: 1
+      - path: leftLeg
+        weight: 1
+      - path: loinCloth
+        weight: 1
+      - path: loinClothRetop:waistController
+        weight: 1
+      - path: rightLeg
+        weight: 1
+      - path: root
+        weight: 1
+      - path: root/chest
+        weight: 1
+      - path: root/chest/leftShoulder
+        weight: 1
+      - path: root/chest/leftShoulder/leftElbow
+        weight: 1
+      - path: root/chest/leftShoulder/leftElbow/leftWrist
+        weight: 1
+      - path: root/chest/leftShoulder/leftElbow/leftWrist/leftHand
+        weight: 1
+      - path: root/chest/neck
+        weight: 1
+      - path: root/chest/neck/head
+        weight: 1
+      - path: root/chest/neck/head/leftEye
+        weight: 1
+      - path: root/chest/neck/head/lowerTeeth
+        weight: 1
+      - path: root/chest/neck/head/rightEye
+        weight: 1
+      - path: root/chest/neck/head/scalp
+        weight: 1
+      - path: root/chest/neck/head/upperTeeth
+        weight: 1
+      - path: root/chest/rightShoulder
+        weight: 1
+      - path: root/chest/rightShoulder/rightElbow
+        weight: 1
+      - path: root/chest/rightShoulder/rightElbow/rightWrist
+        weight: 1
+      - path: root/chest/rightShoulder/rightElbow/rightWrist/rightHand
+        weight: 1
+      - path: root/leftHip
+        weight: 1
+      - path: root/leftHip/leftKnee
+        weight: 1
+      - path: root/leftHip/leftKnee/leftAnkle
+        weight: 1
+      - path: root/leftHip/leftKnee/leftAnkle/leftFoot
+        weight: 1
+      - path: root/leftHip/leftKnee/leftAnkle/leftFoot/leftToe
+        weight: 1
+      - path: root/rightHip
+        weight: 1
+      - path: root/rightHip/rightKnee
+        weight: 1
+      - path: root/rightHip/rightKnee/rightAnkle
+        weight: 1
+      - path: root/rightHip/rightKnee/rightAnkle/rightFoot
+        weight: 1
+      - path: root/rightHip/rightKnee/rightAnkle/rightFoot/rightToe
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: pickup
+      takeName: Take 001
+      firstFrame: 42
+      lastFrame: 69
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: goblinBody
+        weight: 1
+      - path: leftLeg
+        weight: 1
+      - path: loinCloth
+        weight: 1
+      - path: loinClothRetop:waistController
+        weight: 1
+      - path: rightLeg
+        weight: 1
+      - path: root
+        weight: 1
+      - path: root/chest
+        weight: 1
+      - path: root/chest/leftShoulder
+        weight: 1
+      - path: root/chest/leftShoulder/leftElbow
+        weight: 1
+      - path: root/chest/leftShoulder/leftElbow/leftWrist
+        weight: 1
+      - path: root/chest/leftShoulder/leftElbow/leftWrist/leftHand
+        weight: 1
+      - path: root/chest/neck
+        weight: 1
+      - path: root/chest/neck/head
+        weight: 1
+      - path: root/chest/neck/head/leftEye
+        weight: 1
+      - path: root/chest/neck/head/lowerTeeth
+        weight: 1
+      - path: root/chest/neck/head/rightEye
+        weight: 1
+      - path: root/chest/neck/head/scalp
+        weight: 1
+      - path: root/chest/neck/head/upperTeeth
+        weight: 1
+      - path: root/chest/rightShoulder
+        weight: 1
+      - path: root/chest/rightShoulder/rightElbow
+        weight: 1
+      - path: root/chest/rightShoulder/rightElbow/rightWrist
+        weight: 1
+      - path: root/chest/rightShoulder/rightElbow/rightWrist/rightHand
+        weight: 1
+      - path: root/leftHip
+        weight: 1
+      - path: root/leftHip/leftKnee
+        weight: 1
+      - path: root/leftHip/leftKnee/leftAnkle
+        weight: 1
+      - path: root/leftHip/leftKnee/leftAnkle/leftFoot
+        weight: 1
+      - path: root/leftHip/leftKnee/leftAnkle/leftFoot/leftToe
+        weight: 1
+      - path: root/rightHip
+        weight: 1
+      - path: root/rightHip/rightKnee
+        weight: 1
+      - path: root/rightHip/rightKnee/rightAnkle
+        weight: 1
+      - path: root/rightHip/rightKnee/rightAnkle/rightFoot
+        weight: 1
+      - path: root/rightHip/rightKnee/rightAnkle/rightFoot/rightToe
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 20
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

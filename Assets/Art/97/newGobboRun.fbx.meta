@@ -1,0 +1,318 @@
+fileFormatVersion: 2
+guid: f797dd428073a1d418ff9d504481c127
+timeCreated: 1441679007
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: centerOfGravityController
+    100002: chest
+    100004: gobbo
+    100006: head
+    100008: leftAnkle
+    100010: leftBallOfFoot
+    100012: leftEarBase
+    100014: leftEarEnd
+    100016: leftEarMid
+    100018: leftElbow
+    100020: leftFootEnd
+    100022: leftHand
+    100024: leftHip
+    100026: leftIndexA
+    100028: leftIndexB
+    100030: leftIndexC
+    100032: leftKnee
+    100034: leftLeg
+    100036: leftPinkieA
+    100038: leftPinkieB
+    100040: leftPinkieC
+    100042: leftShoulder
+    100044: leftThumbA
+    100046: leftThumbB
+    100048: leftThumbC
+    100050: leftWrist
+    100052: linCloth:Mesh
+    100054: neck
+    100056: //RootNode
+    100058: pelvis
+    100060: rightAnkle
+    100062: rightBallOfFoot
+    100064: rightEarBase
+    100066: rightEarEnd
+    100068: rightEarMid
+    100070: rightElbow
+    100072: rightFootEnd
+    100074: rightHand
+    100076: rightHip
+    100078: rightIndexA
+    100080: rightIndexB
+    100082: rightIndexC
+    100084: rightKnee
+    100086: rightLeg
+    100088: rightPinkieA
+    100090: rightPinkieB
+    100092: rightPinkieC
+    100094: rightShoulder
+    100096: rightThumbA
+    100098: rightThumbB
+    100100: rightThumbC
+    100102: rightWrist
+    100104: topHead
+    400000: centerOfGravityController
+    400002: chest
+    400004: gobbo
+    400006: head
+    400008: leftAnkle
+    400010: leftBallOfFoot
+    400012: leftEarBase
+    400014: leftEarEnd
+    400016: leftEarMid
+    400018: leftElbow
+    400020: leftFootEnd
+    400022: leftHand
+    400024: leftHip
+    400026: leftIndexA
+    400028: leftIndexB
+    400030: leftIndexC
+    400032: leftKnee
+    400034: leftLeg
+    400036: leftPinkieA
+    400038: leftPinkieB
+    400040: leftPinkieC
+    400042: leftShoulder
+    400044: leftThumbA
+    400046: leftThumbB
+    400048: leftThumbC
+    400050: leftWrist
+    400052: linCloth:Mesh
+    400054: neck
+    400056: //RootNode
+    400058: pelvis
+    400060: rightAnkle
+    400062: rightBallOfFoot
+    400064: rightEarBase
+    400066: rightEarEnd
+    400068: rightEarMid
+    400070: rightElbow
+    400072: rightFootEnd
+    400074: rightHand
+    400076: rightHip
+    400078: rightIndexA
+    400080: rightIndexB
+    400082: rightIndexC
+    400084: rightKnee
+    400086: rightLeg
+    400088: rightPinkieA
+    400090: rightPinkieB
+    400092: rightPinkieC
+    400094: rightShoulder
+    400096: rightThumbA
+    400098: rightThumbB
+    400100: rightThumbC
+    400102: rightWrist
+    400104: topHead
+    4300000: leftLeg
+    4300002: rightLeg
+    4300004: linCloth:Mesh
+    4300006: gobbo
+    7400000: run
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: gobbo
+    13700002: leftLeg
+    13700004: linCloth:Mesh
+    13700006: rightLeg
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: run
+      takeName: Take 001
+      firstFrame: 2
+      lastFrame: 23
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: centerOfGravityController
+        weight: 1
+      - path: gobbo
+        weight: 1
+      - path: leftLeg
+        weight: 1
+      - path: linCloth:Mesh
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/chest
+        weight: 1
+      - path: pelvis/chest/leftShoulder
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftIndexA
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftIndexA/leftIndexB
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftIndexA/leftIndexB/leftIndexC
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftPinkieA
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftPinkieA/leftPinkieB
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftPinkieA/leftPinkieB/leftPinkieC
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftThumbA
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftThumbA/leftThumbB
+        weight: 1
+      - path: pelvis/chest/leftShoulder/leftElbow/leftWrist/leftHand/leftThumbA/leftThumbB/leftThumbC
+        weight: 1
+      - path: pelvis/chest/neck
+        weight: 1
+      - path: pelvis/chest/neck/head
+        weight: 1
+      - path: pelvis/chest/neck/head/leftEarBase
+        weight: 1
+      - path: pelvis/chest/neck/head/leftEarBase/leftEarMid
+        weight: 1
+      - path: pelvis/chest/neck/head/leftEarBase/leftEarMid/leftEarEnd
+        weight: 1
+      - path: pelvis/chest/neck/head/rightEarBase
+        weight: 1
+      - path: pelvis/chest/neck/head/rightEarBase/rightEarMid
+        weight: 1
+      - path: pelvis/chest/neck/head/rightEarBase/rightEarMid/rightEarEnd
+        weight: 1
+      - path: pelvis/chest/neck/head/topHead
+        weight: 1
+      - path: pelvis/chest/rightShoulder
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightIndexA
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightIndexA/rightIndexB
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightIndexA/rightIndexB/rightIndexC
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightPinkieA
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightPinkieA/rightPinkieB
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightPinkieA/rightPinkieB/rightPinkieC
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightThumbA
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightThumbA/rightThumbB
+        weight: 1
+      - path: pelvis/chest/rightShoulder/rightElbow/rightWrist/rightHand/rightThumbA/rightThumbB/rightThumbC
+        weight: 1
+      - path: pelvis/leftHip
+        weight: 1
+      - path: pelvis/leftHip/leftKnee
+        weight: 1
+      - path: pelvis/leftHip/leftKnee/leftAnkle
+        weight: 1
+      - path: pelvis/leftHip/leftKnee/leftAnkle/leftBallOfFoot
+        weight: 1
+      - path: pelvis/leftHip/leftKnee/leftAnkle/leftBallOfFoot/leftFootEnd
+        weight: 1
+      - path: pelvis/rightHip
+        weight: 1
+      - path: pelvis/rightHip/rightKnee
+        weight: 1
+      - path: pelvis/rightHip/rightKnee/rightAnkle
+        weight: 1
+      - path: pelvis/rightHip/rightKnee/rightAnkle/rightBallOfFoot
+        weight: 1
+      - path: pelvis/rightHip/rightKnee/rightAnkle/rightBallOfFoot/rightFootEnd
+        weight: 1
+      - path: rightLeg
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 20
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

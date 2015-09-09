@@ -1,0 +1,117 @@
+fileFormatVersion: 2
+guid: 6ca2e1fea7583794c910cc97197f58fc
+timeCreated: 1440256764
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: spikeBarricade
+    100002: //RootNode
+    100004: spikeBarricade1
+    100006: spikeBarricade2
+    100008: spikeBarricade3
+    100010: spikeBarricade4
+    100012: spikeBarricade5
+    100014: spikeBarricade6
+    100016: spikeBarricade7
+    100018: spikeBarricadeXbar
+    400000: //RootNode
+    400002: spikeBarricade
+    400004: spikeBarricade1
+    400006: spikeBarricade2
+    400008: spikeBarricade3
+    400010: spikeBarricade4
+    400012: spikeBarricade5
+    400014: spikeBarricade6
+    400016: spikeBarricade7
+    400018: spikeBarricadeXbar
+    2300000: spikeBarricade
+    2300002: spikeBarricade1
+    2300004: spikeBarricade2
+    2300006: spikeBarricade3
+    2300008: spikeBarricade4
+    2300010: spikeBarricade5
+    2300012: spikeBarricade6
+    2300014: spikeBarricade7
+    2300016: spikeBarricadeXbar
+    3300000: spikeBarricade
+    3300002: spikeBarricade1
+    3300004: spikeBarricade2
+    3300006: spikeBarricade3
+    3300008: spikeBarricade4
+    3300010: spikeBarricade5
+    3300012: spikeBarricade6
+    3300014: spikeBarricade7
+    3300016: spikeBarricadeXbar
+    4300000: spikeBarricade
+    4300002: spikeBarricadeXbar
+    4300004: spikeBarricade1
+    4300006: spikeBarricade2
+    4300008: spikeBarricade3
+    4300010: spikeBarricade4
+    4300012: spikeBarricade5
+    4300014: spikeBarricade6
+    4300016: spikeBarricade7
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
