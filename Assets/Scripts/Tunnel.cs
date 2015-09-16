@@ -5,8 +5,7 @@ using System.Collections.Generic;
 public class Tunnel : MonoBehaviour {
 	private LevelController Controller;
 	private int counter = 0;
-
-	public GameObject[] ObstaclePrefabs;
+	
 	public GameObject PowerBoostPrefab;
 	public GameObject SpeedBoostPrefab;
 	public GameObject GoblinPrefab;
@@ -80,10 +79,24 @@ public class Tunnel : MonoBehaviour {
 		}
 	}
 
+	// TODO: This code sucks
 	void CreateEnvironmentObject() {
 		Vector3 spawnPosition = GetRandomEdgePosition();
-		GameObject obj = (GameObject)Instantiate(EnvironmentPrefabs[Random.Range(0, EnvironmentPrefabs.Length)], spawnPosition, Quaternion.identity);
-		obj.transform.Rotate(new Vector3(0f, Random.Range(0f, 360f)));
+		int selectedIndex = Random.Range(0, EnvironmentPrefabs.Length);
+		if(selectedIndex == 1 && Controller.Player.transform.position.x < Random.Range(0, 5000))
+			selectedIndex = 0;
+		GameObject obj = (GameObject)Instantiate(EnvironmentPrefabs[selectedIndex], spawnPosition, Quaternion.identity);
+		if(selectedIndex == 0) {
+			obj.transform.Rotate(new Vector3(0f, Random.Range(0f, 360f)));
+		} else {
+			// Goblin home
+			if(spawnPosition.z < 0) {
+				obj.transform.Rotate(new Vector3(0f, 180f));
+				obj.transform.Translate(new Vector3(0f, 0f, -.75f), Space.World);
+			} else {
+				obj.transform.Translate(new Vector3(0f, 0f, .75f), Space.World);
+			}
+		}
 		float scaleModifier = Random.Range(.8f, 1.5f);
 		Vector3 localScale = obj.transform.localScale;
 		localScale.x *= scaleModifier;
@@ -122,14 +135,6 @@ public class Tunnel : MonoBehaviour {
 			if(isPowerup) {
 				GameObject obj = (GameObject)Instantiate(powerupPrefab, SelectedPosition, Quaternion.identity);
 				obj.transform.parent = transform;
-			} else {
-				int max = maxObstacleDifficulty;
-				if(max > ObstaclePrefabs.Length)
-					max = ObstaclePrefabs.Length;
-				GameObject obj = (GameObject)Instantiate(ObstaclePrefabs[Random.Range(0, max)], SelectedPosition, Quaternion.identity);
-				Obstacle obstacle = obj.GetComponent<Obstacle>();
-				createdObstacles.Add(obstacle);
-				obj.transform.parent = transform;
 			}
 			return true;
 		}
@@ -152,8 +157,8 @@ public class Tunnel : MonoBehaviour {
 	}
 
 	Vector3 GetRandomEdgePosition() {
-		float zPosition = (Random.Range(0, 2) == 0 ? -8.5f : 8.5f);
-		zPosition += Random.Range(-.75f, .75f);
+		float zPosition = (Random.Range(0, 2) == 0 ? -8.75f : 8.75f);
+		zPosition += Random.Range(-.5f, .5f);
 		float xPosition = Random.Range(-15f, 15f);
 		return new Vector3(transform.position.x + xPosition,transform.position.y + 0f,transform.position.z + zPosition);
 	}
