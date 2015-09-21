@@ -28,7 +28,6 @@ public class GameController : MonoBehaviour {
 		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
 			UnPause();
 			HideUI (true);
-			StartCoroutine(ObstacleCreator.IncreaseDifficulty());
 		});
 
 		Tunnel.ChanceOfGoblin = 0f;

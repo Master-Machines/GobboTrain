@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public const float MiddleLanePosition = 0f;
 	public const float RightLanePosition = -5f;
 	private const float ExtraLaneSwitchTime = .2f;
-	private const float MinLaneSwitchTime = .1f;
+	private const float MinLaneSwitchTime = .08f;
 	public float ModerateSpeed = 35f;
 	public float MaxSpeed = 55f;
 	public const float GodSpeed = 85f;
@@ -255,7 +255,6 @@ public class PlayerController : MonoBehaviour {
 				GameController.IncreaseCurrency(obstacle.CurrencyBonus);
 				// GameController.IncreaseScore((int)Mathf.Pow (obstacle.RequiredMomentum, 1.5f));
 				if(other.gameObject.CompareTag("Wall")) {
-					Bomb();
 					GameController.IncreaseMultiplier();
 					LevelController.WallDestroyed();
 					CurrentGoblins = 0;

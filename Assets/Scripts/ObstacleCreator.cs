@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ObstacleCreator : MonoBehaviour {
-	public const float SpawnDistance = 155f;
+	public const float SpawnDistance = 95f;
 
 	public LevelController LevelController;
 	public PlayerController PlayerController;
@@ -10,6 +10,7 @@ public class ObstacleCreator : MonoBehaviour {
 
 	public float RowDistance {get;set;}
 	public float CurrentRowPosition {get;set;}
+	private float RowDistanceModifier {get;set;}
 
 	public GameObject[] ObstaclePrefabs;
 	public GameObject PowerBoostPrefab;
@@ -27,34 +28,25 @@ public class ObstacleCreator : MonoBehaviour {
 		RowDistance = 40f;
 		CurrentRowPosition = 0f;
 		CurrentRowPosition = 160f;
+		RowDistanceModifier = 1f;
+		IncreaseDifficulty();
 	}
 
-	public IEnumerator IncreaseDifficulty() {
-		yield return new WaitForSeconds(5f);
-		if(Random.Range (0f, 1f) < .25f) {
-			MaximumNumberOfObstacles ++;
-			if(MaximumNumberOfObstacles > 3) {
-				MaximumNumberOfObstacles = 3;
-				MinimumNumberOfObstacles ++;
-				if(MinimumNumberOfObstacles > 1)
-					MinimumNumberOfObstacles = 1;
-			}
+	public void IncreaseDifficulty() {
+		MaximumNumberOfObstacles ++;
+		if(MaximumNumberOfObstacles > 3) {
+			MaximumNumberOfObstacles = 3;
 		}
-		
-		if(Random.Range(0f, 1f) < .5f) {
-			MaximumObstacleIndex ++;
-		}
+	
+		MaximumObstacleIndex ++;
 
-		RowDistance *= Random.Range(.93f, .97f);
-		if(RowDistance < 15f)
-			RowDistance = 15f;
-
-		StartCoroutine(IncreaseDifficulty());
+		RowDistanceModifier *= .8f;
 	}
 
 	void Update () {
 		if(PlayerController.transform.position.x >= CurrentRowPosition - SpawnDistance)
 			CreateNextRow();
+		RowDistance = 10f + PlayerController.GetSpeed() * .5f * (.1f + RowDistanceModifier);
 	}
 
 	void CreateNextRow() {
@@ -73,18 +65,20 @@ public class ObstacleCreator : MonoBehaviour {
 		}
 
 
-		CurrentRowPosition += RowDistance * Random.Range (.75f, 1.25f);
+		CurrentRowPosition += RowDistance * Random.Range (.9f, 1.1f);
 	}
 
 	void CreateObstacle(int lane) {
-		float position = GetPositionFromLane(lane);
-
-		int selectedIndex = Random.Range (MinimumObstacleIndex, MaximumObstacleIndex);
-		if(selectedIndex >= ObstaclePrefabs.Length)
-			selectedIndex = ObstaclePrefabs.Length - 1;
-
-		GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition, transform.position.y, position), Quaternion.identity);
-		createdObj.transform.SetParent(this.transform);
+		if(!LevelController.IsPositionNearWall((int)CurrentRowPosition, 80)) {
+			float position = GetPositionFromLane(lane);
+			
+			int selectedIndex = Random.Range (MinimumObstacleIndex, MaximumObstacleIndex);
+			if(selectedIndex >= ObstaclePrefabs.Length)
+				selectedIndex = ObstaclePrefabs.Length - 1;
+			
+			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition, transform.position.y, position), Quaternion.identity);
+			createdObj.transform.SetParent(this.transform);
+		}
 	}
 
 	void CreatePowerup(int lane) {

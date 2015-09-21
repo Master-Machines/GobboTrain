@@ -23,10 +23,11 @@ public class LevelController : MonoBehaviour {
 	public const int WallWarningDistance = 350;
 	public int WallHealth;
 	public bool WallActive = false;
+	public ObstacleCreator ObstacleCreator;
 
 	// Use this for initialization
 	void Start () {
-		NextWallPosition += Random.Range (1000, 1400);
+		NextWallPosition += 1200;
 		WallHealth = 100;
 		MinObstacles = 0;
 		MaxObstacles = 2;
@@ -62,9 +63,10 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void WallDestroyed() {
-		WallHealth += 25;
-		NextWallPosition += Random.Range(1000, 1400);
+		WallHealth += 5;
+		NextWallPosition += 1200;
 		WallActive = false;
+		ObstacleCreator.IncreaseDifficulty();
 	}
 
 	void CreateNextPiece(bool updateCreationPosition, bool first) {
@@ -86,5 +88,9 @@ public class LevelController : MonoBehaviour {
 
 	public void RemoveTunnel(Tunnel tunnel) {
 		Tunnels.Remove(tunnel);
+	}
+
+	public bool IsPositionNearWall(int position, int threshold) {
+		return (position > NextWallPosition - threshold) && (position < NextWallPosition + threshold);
 	}
 }

@@ -22,7 +22,7 @@ public class Tunnel : MonoBehaviour {
 		LevelController = levelController;
 		// CreateLaneObstacles(obstacleCount, maxObstacleDifficulty);
 		CreateEnvironment();
-		ChanceOfGoblin += Random.Range (.03f, .03f);
+		ChanceOfGoblin += Random.Range (.03f, .07f);
 		ChanceOfSpeed += Random.Range (.05f, .06f);
 		ChanceOfPowerBoost += Random.Range(.07f, .08f);
 
@@ -37,7 +37,7 @@ public class Tunnel : MonoBehaviour {
 		}
 
 		if(Random.Range (0f, 1f) < ChanceOfPowerBoost) {
-			CreateObstacle(true, 0, PowerBoostPrefab);
+			//CreateObstacle(true, 0, PowerBoostPrefab);
 			ChanceOfPowerBoost = .12f;
 		}
 
