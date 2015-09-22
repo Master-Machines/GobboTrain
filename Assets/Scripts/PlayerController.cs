@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 	public int CurrentGoblins = 0;
 	public float GoblinPowerBonus = .5f;
 
-	public float DistanceBetweenPoints = .2f;
+	public const float DistanceBetweenPoints = 50f;
 	public float LastDistanceWherePointsWereGiven = 0f;
 
 	public GameObject[] ExtraGobbos;
@@ -127,9 +127,9 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		while(transform.position.x - LastDistanceWherePointsWereGiven >= DistanceBetweenPoints) {
+		if((transform.position.x - LastDistanceWherePointsWereGiven) > DistanceBetweenPoints) {
 			GameController.IncreaseScore(1);
-			LastDistanceWherePointsWereGiven += DistanceBetweenPoints;
+			LastDistanceWherePointsWereGiven = transform.position.x;
 		}
 	}
 

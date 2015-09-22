@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ObstacleCreator : MonoBehaviour {
-	public const float SpawnDistance = 95f;
+	public const float SpawnDistance = 105f;
 
 	public LevelController LevelController;
 	public PlayerController PlayerController;
@@ -46,7 +46,7 @@ public class ObstacleCreator : MonoBehaviour {
 	void Update () {
 		if(PlayerController.transform.position.x >= CurrentRowPosition - SpawnDistance)
 			CreateNextRow();
-		RowDistance = 10f + PlayerController.GetSpeed() * .5f * (.1f + RowDistanceModifier);
+		RowDistance = 10f + PlayerController.GetSpeed() * .4f * (.1f + RowDistanceModifier);
 	}
 
 	void CreateNextRow() {
@@ -76,7 +76,7 @@ public class ObstacleCreator : MonoBehaviour {
 			if(selectedIndex >= ObstaclePrefabs.Length)
 				selectedIndex = ObstaclePrefabs.Length - 1;
 			
-			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition, transform.position.y, position), Quaternion.identity);
+			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition + Random.Range (-3f, 3f), transform.position.y, position), Quaternion.identity);
 			createdObj.transform.SetParent(this.transform);
 		}
 	}
