@@ -21,14 +21,15 @@ public class LevelController : MonoBehaviour {
 
 	public int NextWallPosition;
 	public const int WallWarningDistance = 350;
+	private int wallCounter = 0;
 	public int WallHealth;
 	public bool WallActive = false;
 	public ObstacleCreator ObstacleCreator;
 
 	// Use this for initialization
 	void Start () {
-		NextWallPosition += 1200;
-		WallHealth = 100;
+		NextWallPosition += 1400;
+		WallHealth = 120;
 		MinObstacles = 0;
 		MaxObstacles = 2;
 		MaxObstacleDifficulty = 1;
@@ -53,10 +54,13 @@ public class LevelController : MonoBehaviour {
 	void CheckForWalls() {
 		if(!WallActive){
 			if(Player.transform.position.x > NextWallPosition - WallWarningDistance) {
+				wallCounter ++;
 				GameController.DisplayWallWarning();
 				WallActive = true;
 				GameObject createdWall = (GameObject)Instantiate(WallPrefabs[0], new Vector3(NextWallPosition, 0f, 0f), Quaternion.identity);
 				Obstacle ob = createdWall.GetComponent<Obstacle>();
+				TextMesh text = createdWall.GetComponentInChildren<TextMesh>();
+				text.text = "wall " + wallCounter.ToString();
 				ob.RequiredMomentum = WallHealth;
 			}
 		}
@@ -64,7 +68,7 @@ public class LevelController : MonoBehaviour {
 
 	public void WallDestroyed() {
 		WallHealth += 5;
-		NextWallPosition += 1200;
+		NextWallPosition += 1400 - (40 * wallCounter);
 		WallActive = false;
 		ObstacleCreator.IncreaseDifficulty();
 	}

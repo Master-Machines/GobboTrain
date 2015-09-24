@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 983de8719d435ef449a21908ae75400b
-timeCreated: 1440262220
+timeCreated: 1443062575
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - StandardMaterial: {instanceID: 0}
+  - GoldMaterial: {instanceID: 0}
+  - GoldParticles: {fileID: 112430, guid: d951ab43ae3d5ad42a114e1f1332b94b, type: 2}
+  - ExplosionParticles: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

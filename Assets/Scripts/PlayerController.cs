@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public const float MiddleLanePosition = 0f;
 	public const float RightLanePosition = -5f;
 	private const float ExtraLaneSwitchTime = .2f;
-	private const float MinLaneSwitchTime = .08f;
+	private const float MinLaneSwitchTime = .095f;
 	public float ModerateSpeed = 35f;
 	public float MaxSpeed = 55f;
 	public const float GodSpeed = 85f;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 			UpdatePosition();
 			CheckInput();
 			UpdateSpeed(true);
-			UpdateObstacleMaterials();
+			//UpdateObstacleMaterials();
 			if(Input.GetButtonDown("Jump") && Bombs-- > 0) {
 				Bomb();
 			}
@@ -252,7 +252,8 @@ public class PlayerController : MonoBehaviour {
 				if(speedModifer < .4f)
 					speedModifer = .4f;
 				Speed *= speedModifer;
-				GameController.IncreaseCurrency(obstacle.CurrencyBonus);
+				if(obstacle.IsGold)
+					GameController.IncreaseCurrency(obstacle.CurrencyBonus);
 				// GameController.IncreaseScore((int)Mathf.Pow (obstacle.RequiredMomentum, 1.5f));
 				if(other.gameObject.CompareTag("Wall")) {
 					GameController.IncreaseMultiplier();

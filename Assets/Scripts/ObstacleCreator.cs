@@ -20,7 +20,7 @@ public class ObstacleCreator : MonoBehaviour {
 	public int MinimumNumberOfObstacles {get;set;}
 	public int MaximumNumberOfObstacles {get;set;}
 	public int MinimumObstacleIndex {get; set;}
-	public int MaximumObstacleIndex {get; set;}
+	public float MaximumObstacleIndex {get; set;}
 
 	void Start () {
 		MinimumNumberOfObstacles = 0;
@@ -29,6 +29,7 @@ public class ObstacleCreator : MonoBehaviour {
 		CurrentRowPosition = 0f;
 		CurrentRowPosition = 160f;
 		RowDistanceModifier = 1f;
+		MaximumObstacleIndex = 1f;
 		IncreaseDifficulty();
 	}
 
@@ -38,9 +39,9 @@ public class ObstacleCreator : MonoBehaviour {
 			MaximumNumberOfObstacles = 3;
 		}
 	
-		MaximumObstacleIndex ++;
+		MaximumObstacleIndex += 1f;
 
-		RowDistanceModifier *= .8f;
+		RowDistanceModifier *= .75f;
 	}
 
 	void Update () {
@@ -71,8 +72,8 @@ public class ObstacleCreator : MonoBehaviour {
 	void CreateObstacle(int lane) {
 		if(!LevelController.IsPositionNearWall((int)CurrentRowPosition, 80)) {
 			float position = GetPositionFromLane(lane);
-			
-			int selectedIndex = Random.Range (MinimumObstacleIndex, MaximumObstacleIndex);
+			int maxInt = (int)MaximumObstacleIndex;
+			int selectedIndex = Random.Range (MinimumObstacleIndex, maxInt);
 			if(selectedIndex >= ObstaclePrefabs.Length)
 				selectedIndex = ObstaclePrefabs.Length - 1;
 			
