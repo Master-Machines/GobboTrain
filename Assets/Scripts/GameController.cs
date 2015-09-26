@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
 	public int Multiplier = 1;
 	public int SessionCurrency = 0;
 	public float TimePLayed = 0f;
+	public Button PauseButton;
 
 	public ObstacleCreator ObstacleCreator;
 
@@ -81,6 +82,7 @@ public class GameController : MonoBehaviour {
 		NewPointsDisplay.gameObject.SetActive(show);
 		WallWarning.gameObject.SetActive(false);
 		CurrencyDisplay.gameObject.SetActive(show);
+		PauseButton.gameObject.SetActive(show);
 	}
 
 	IEnumerator DelayedNewGame() {
@@ -110,13 +112,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Pause() {
-		Time.timeScale = 0f;
-		Global.Instance.isPaused = true;
+		TimeController.Pause (true);
 	}
 
 	public void UnPause() {
-		Time.timeScale = 1f;
-		Global.Instance.isPaused = false;
+		TimeController.Pause(false);
 	}
 
 	void WallWarningOff() {

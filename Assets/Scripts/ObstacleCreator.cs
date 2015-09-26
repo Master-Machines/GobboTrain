@@ -24,7 +24,7 @@ public class ObstacleCreator : MonoBehaviour {
 
 	void Start () {
 		MinimumNumberOfObstacles = 0;
-		MaximumNumberOfObstacles = 2;
+		MaximumNumberOfObstacles = 1;
 		RowDistance = 40f;
 		CurrentRowPosition = 0f;
 		CurrentRowPosition = 160f;
@@ -70,14 +70,14 @@ public class ObstacleCreator : MonoBehaviour {
 	}
 
 	void CreateObstacle(int lane) {
-		if(!LevelController.IsPositionNearWall((int)CurrentRowPosition, 80)) {
+		if(!LevelController.IsPositionNearWall((int)CurrentRowPosition, 40)) {
 			float position = GetPositionFromLane(lane);
 			int maxInt = (int)MaximumObstacleIndex;
 			int selectedIndex = Random.Range (MinimumObstacleIndex, maxInt);
 			if(selectedIndex >= ObstaclePrefabs.Length)
 				selectedIndex = ObstaclePrefabs.Length - 1;
 			
-			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition + Random.Range (-3f, 3f), transform.position.y, position), Quaternion.identity);
+			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition + Random.Range (-3.5f, 3.5f), transform.position.y, position), Quaternion.identity);
 			createdObj.transform.SetParent(this.transform);
 		}
 	}
@@ -92,7 +92,7 @@ public class ObstacleCreator : MonoBehaviour {
 			position = PlayerController.LeftLanePosition;
 		else if(lane == 2)
 			position = PlayerController.RightLanePosition;
-		position += Random.Range (-1f, 1f);
+		position += Random.Range (-1.25f, 1.25f);
 		return position;
 	}
 }

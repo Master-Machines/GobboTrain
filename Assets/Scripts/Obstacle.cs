@@ -39,7 +39,7 @@ public class Obstacle : MonoBehaviour {
 			goldP.GetComponent<ParticleSystem>().emissionRate = RequiredMomentum;
 			goldP.transform.SetParent(transform);
 			goldP.transform.Translate(Vector3.up);
-
+			RequiredMomentum *= .8f;
 			IsGold = true;
 		}
 	}

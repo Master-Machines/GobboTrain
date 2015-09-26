@@ -13,9 +13,7 @@ public class PlayerController : MonoBehaviour {
 	public float ModerateSpeed = 35f;
 	public float MaxSpeed = 55f;
 	public const float GodSpeed = 85f;
-	private const float MinCameraFOV = 45f;
-	private const float MaxCameraFOV = 60f;
-	private const float CameraFOVAdjustmentSpeed = 25f;
+
 	private const float SpeedBoostBonus = 15f;
 	private const float SpeedBoostTime = 3f;
 	private const float BombDistance = 150f;
@@ -48,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 
 	private float LaneSwitchCounter = 0f;
 	private Lane TargetLane;
-	public Camera camera;
 	public int MomentumBonuses = 0;
 	public LevelController LevelController;
 	public GameObject SpeedPickupExplosion;
@@ -62,11 +59,13 @@ public class PlayerController : MonoBehaviour {
 
 	public Animation[] runAnims;
 
+	public GameObject RagdollPrefab;
+
 	// Use this for initialization
 	void Start () {
 		Speed = 10f;
 		CurrentLane = Lane.Middle;
-		camera.fieldOfView = MinCameraFOV;
+
 	}
 	
 	// Update is called once per frame
@@ -80,7 +79,6 @@ public class PlayerController : MonoBehaviour {
 				Bomb();
 			}
 		}
-		UpdateCamera();
 	}
 
 	void UpdateSpeed(bool on) {
@@ -105,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 			animSpeed = .75f + Speed * .015f;
 		}
 		foreach(Animation anim in runAnims) {
-			anim["run"].speed = animSpeed;
+			anim["Run"].speed = animSpeed;
 		}
 	}
 
@@ -133,16 +131,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void UpdateCamera() {
-		float TargetCameraFOV = MinCameraFOV + (((Speed + BonusSpeed) / MaxSpeed)) * (MaxCameraFOV - MinCameraFOV);
-		if(RoughlyEqual(camera.fieldOfView, TargetCameraFOV, .5f)) {
-			camera.fieldOfView = TargetCameraFOV;
-		} else if(camera.fieldOfView < TargetCameraFOV) {
-			camera.fieldOfView += CameraFOVAdjustmentSpeed * Time.deltaTime;
-		} else {
-			camera.fieldOfView -= CameraFOVAdjustmentSpeed * Time.deltaTime;
-		}
-	}
+
 
 	void CheckInput() {
 		float xAxis = Input.GetAxis("Horizontal");
@@ -153,7 +142,7 @@ public class PlayerController : MonoBehaviour {
 					SwitchLanes(-1);
 				} else if(xAxis > .1f) {
 					SwitchLanes(1);
-				} else if(Input.GetMouseButton(0) && !SwitchingLanes) {
+				} else if(Input.GetMouseButton(0) && !SwitchingLanes && Input.mousePosition.y < Screen.height - 100f) {
 					if(Input.mousePosition.x > Screen.width/2f) {
 						SwitchLanes(1);
 					}else {
@@ -258,6 +247,7 @@ public class PlayerController : MonoBehaviour {
 				if(other.gameObject.CompareTag("Wall")) {
 					GameController.IncreaseMultiplier();
 					LevelController.WallDestroyed();
+					CreateRagdolls();
 					CurrentGoblins = 0;
 					GameController.HighlightPower(false);
 					SetExtraGobbos();
@@ -344,6 +334,25 @@ public class PlayerController : MonoBehaviour {
 		                          deviceRotation * Vector3.forward)
 			); */
 		return deviceRotation.eulerAngles.y;
+	}
+
+	void CreateRagdolls() {
+		float xPosition = -.75f;
+		for(int i = 0; i < CurrentGoblins; i++) {
+			Vector3 creationPosition = transform.position;
+			creationPosition.x += xPosition;
+			GameObject rag = (GameObject)Instantiate(RagdollPrefab, creationPosition, Quaternion.identity);
+			Transform pelvis = rag.transform.FindChild("pelvis");
+			Vector3 forceAmount = new Vector3(Random.Range (60f, 80f), Random.Range(6f, 12f), Random.Range (-16f, 16f));
+			forceAmount *= 100f;
+			Rigidbody[] rigidBodies = rag.GetComponentsInChildren<Rigidbody>();
+			foreach(Rigidbody r in rigidBodies) {
+				r.AddForce(forceAmount);
+			}
+
+
+			xPosition -= .75f;
+		}
 	}
 
 }

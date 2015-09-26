@@ -62,12 +62,14 @@ public class LevelController : MonoBehaviour {
 				TextMesh text = createdWall.GetComponentInChildren<TextMesh>();
 				text.text = "wall " + wallCounter.ToString();
 				ob.RequiredMomentum = WallHealth;
+				TimeController.EnterSlowMotionPosition = NextWallPosition - TimeController.distanceBeforeWallToStartSlowMo;
 			}
 		}
 	}
 
 	public void WallDestroyed() {
 		WallHealth += 5;
+		TimeController.WallDestroyed = true;
 		NextWallPosition += 1400 - (40 * wallCounter);
 		WallActive = false;
 		ObstacleCreator.IncreaseDifficulty();

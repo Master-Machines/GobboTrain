@@ -1,0 +1,83 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class TimeController : MonoBehaviour {
+	public static bool IsPaused {get; private set;}
+	public static float EnterSlowMotionPosition;
+	public static bool WallDestroyed = false;
+
+	private bool enteringSlowMo = false;
+	private bool exitingSlowMo = false;
+	public const float timeToFast = .4f;
+	public const float timeToSlow = .8f;
+	public const float slowScale = .2f;
+	public const float distanceBeforeWallToStartSlowMo = 70f;
+	private float timeCounter;
+	public PlayerController Player;
+	public Text PauseButtonText;
+
+	void Awake() {
+		EnterSlowMotionPosition = 999999999f;
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if(!IsPaused) {
+			if(Player.transform.position.x > EnterSlowMotionPosition) {
+				EnterSlowMotion();
+				EnterSlowMotionPosition = 999999999f;
+			} else if(WallDestroyed) {
+				WallDestroyed = false;
+				ExitSlowMotion();
+			}
+			if(enteringSlowMo) {
+				timeCounter += Time.deltaTime;
+				if(timeCounter >= timeToSlow) {
+					enteringSlowMo = false;
+					Time.timeScale = slowScale;
+				} else {
+					Time.timeScale = Mathf.Lerp(1f, slowScale, timeCounter/timeToSlow);
+				}
+			}
+
+			if(exitingSlowMo) {
+				timeCounter += Time.deltaTime;
+				if(timeCounter >= timeToFast) {
+					exitingSlowMo = false;
+					Time.timeScale = 1f;
+				} else {
+					Time.timeScale = Mathf.Lerp(slowScale, 1f, timeCounter/timeToFast);
+				}
+			}
+		} else {
+			Time.timeScale = 0f;
+		}
+	}
+
+	public void EnterSlowMotion() {
+		if(!enteringSlowMo) {
+			timeCounter = 0f;
+			enteringSlowMo = true;
+		}
+	}
+
+	public void ExitSlowMotion() {
+		if(!exitingSlowMo) {
+			enteringSlowMo = false;
+			timeCounter = 0f;
+			exitingSlowMo = true;
+		}
+	}
+
+	public static void Pause(bool pause) {
+		IsPaused = pause;
+		Time.timeScale = IsPaused ? 0f : 1;
+	}
+
+	// for Buttons
+	public void TogglePause() {
+		Pause (!IsPaused);
+		PauseButtonText.text = IsPaused ? "Play" : "Pause";
+	}
+}
