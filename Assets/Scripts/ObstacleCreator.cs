@@ -70,7 +70,7 @@ public class ObstacleCreator : MonoBehaviour {
 	}
 
 	void CreateObstacle(int lane) {
-		if(!LevelController.IsPositionNearWall((int)CurrentRowPosition, 40)) {
+		if(!LevelController.IsPositionNearWall((int)CurrentRowPosition, 20)) {
 			float position = GetPositionFromLane(lane);
 			int maxInt = (int)MaximumObstacleIndex;
 			int selectedIndex = Random.Range (MinimumObstacleIndex, maxInt);

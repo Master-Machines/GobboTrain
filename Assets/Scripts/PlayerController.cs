@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour {
 	public const float LeftLanePosition = 5f;
 	public const float MiddleLanePosition = 0f;
 	public const float RightLanePosition = -5f;
-	private const float ExtraLaneSwitchTime = .2f;
-	private const float MinLaneSwitchTime = .095f;
+	private const float ExtraLaneSwitchTime = 0f;
+	private const float MinLaneSwitchTime = .1f;
 	public float ModerateSpeed = 35f;
 	public float MaxSpeed = 55f;
 	public const float GodSpeed = 85f;
@@ -60,12 +60,13 @@ public class PlayerController : MonoBehaviour {
 	public Animation[] runAnims;
 
 	public GameObject RagdollPrefab;
+	public SwipeDetector SwipeDetector;
 
 	// Use this for initialization
 	void Start () {
 		Speed = 10f;
 		CurrentLane = Lane.Middle;
-
+		SwipeDetector.SwipeEvents.Add(SwipeHappened);
 	}
 	
 	// Update is called once per frame
@@ -143,11 +144,11 @@ public class PlayerController : MonoBehaviour {
 				} else if(xAxis > .1f) {
 					SwitchLanes(1);
 				} else if(Input.GetMouseButton(0) && !SwitchingLanes && Input.mousePosition.y < Screen.height - 100f) {
-					if(Input.mousePosition.x > Screen.width/2f) {
+					/*if(Input.mousePosition.x > Screen.width/2f) {
 						SwitchLanes(1);
 					}else {
 						SwitchLanes(-1);
-					}
+					}*/
 				}
 			} else {
 				float tilt = Input.acceleration.x;
@@ -168,6 +169,16 @@ public class PlayerController : MonoBehaviour {
 
 		if(RoughlyEqual(xAxis, 0f, .02f)) {
 			InputPressed = false;
+		}
+	}
+
+	void SwipeHappened(SwipeDetector.SwipeType type) {
+		if(!InputPressed && !SwitchingLanes) {
+			if(type == SwipeDetector.SwipeType.Left) {
+				SwitchLanes(-1);
+			} else if(type == SwipeDetector.SwipeType.Right) {
+				SwitchLanes(1);
+			}
 		}
 	}
 
@@ -343,7 +354,7 @@ public class PlayerController : MonoBehaviour {
 			creationPosition.x += xPosition;
 			GameObject rag = (GameObject)Instantiate(RagdollPrefab, creationPosition, Quaternion.identity);
 			Transform pelvis = rag.transform.FindChild("pelvis");
-			Vector3 forceAmount = new Vector3(Random.Range (60f, 80f), Random.Range(6f, 12f), Random.Range (-16f, 16f));
+			Vector3 forceAmount = new Vector3(Random.Range (60f, 80f), Random.Range(3f, 12f), Random.Range (-16f, 16f));
 			forceAmount *= 100f;
 			Rigidbody[] rigidBodies = rag.GetComponentsInChildren<Rigidbody>();
 			foreach(Rigidbody r in rigidBodies) {

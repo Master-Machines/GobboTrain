@@ -31,11 +31,10 @@ public class CameraConroller : MonoBehaviour {
 		float delta = Time.timeScale - TimeController.slowScale;
 		float SlowPercent = 1f - ((maxDelta - delta) / maxDelta);
 		Debug.Log (SlowPercent);
-		camera.fieldOfView = MinCameraFOV + (SlowPercent * BonusCameraFOV);
+		camera.fieldOfView = MinCameraFOV + (SlowPercent * (TargetCameraFOV - MinCameraFOV));
 	}
 
 	void UpdateCameraNormal() {
-		float TargetCameraFOV = MinCameraFOV + ((Player.GetSpeed() / Player.MaxSpeed)) * BonusCameraFOV;
 		if(PlayerController.RoughlyEqual(camera.fieldOfView, TargetCameraFOV, .5f)) {
 			camera.fieldOfView = TargetCameraFOV;
 		} else if(camera.fieldOfView < TargetCameraFOV) {
@@ -44,4 +43,8 @@ public class CameraConroller : MonoBehaviour {
 			camera.fieldOfView -= CameraFOVAdjustmentSpeed * Time.deltaTime;
 		}
 	}
+
+	float TargetCameraFOV {get {
+		return MinCameraFOV + ((Player.GetSpeed() / Player.MaxSpeed)) * BonusCameraFOV;
+	}}
 }
