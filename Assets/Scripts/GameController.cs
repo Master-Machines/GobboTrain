@@ -30,10 +30,6 @@ public class GameController : MonoBehaviour {
 			UnPause();
 			HideUI (true);
 		});
-
-		Tunnel.ChanceOfGoblin = 0f;
-		Tunnel.ChanceOfSpeed = 0f;
-		Tunnel.ChanceOfPowerBoost = 0f;
 	}
 
 	public void IncreaseCurrency(int amount) {

@@ -5,16 +5,12 @@ using System.Collections.Generic;
 public class Tunnel : MonoBehaviour {
 	private LevelController Controller;
 	private int counter = 0;
-	
+	private List<Obstacle> createdObstacles = new List<Obstacle>();
 	public GameObject PowerBoostPrefab;
 	public GameObject SpeedBoostPrefab;
 	public GameObject GoblinPrefab;
 	public GameObject[] LaneDividerPrefabs;
 	public GameObject[] EnvironmentPrefabs;
-	private List<Obstacle> createdObstacles = new List<Obstacle>();
-	public static float ChanceOfGoblin = 0f;
-	public static float ChanceOfSpeed = 0f;
-	public static float ChanceOfPowerBoost = 0f;
 	public LevelController LevelController {get; set;}
 
 	public void Setup(LevelController controller, int obstacleCount, int maxObstacleDifficulty, LevelController levelController) {
@@ -22,26 +18,6 @@ public class Tunnel : MonoBehaviour {
 		LevelController = levelController;
 		// CreateLaneObstacles(obstacleCount, maxObstacleDifficulty);
 		CreateEnvironment();
-		ChanceOfGoblin += Random.Range (.03f, .07f);
-		ChanceOfSpeed += Random.Range (.05f, .06f);
-		ChanceOfPowerBoost += Random.Range(.07f, .08f);
-
-		if(Random.Range (0f, 1f) < ChanceOfGoblin) {
-			CreateObstacle(true, 0, GoblinPrefab);
-			ChanceOfGoblin = 0f;
-		}
-
-		if(Random.Range (0f, 1f) < ChanceOfSpeed) {
-			CreateObstacle(true, 0, SpeedBoostPrefab);
-			ChanceOfSpeed = .1f;
-		}
-
-		if(Random.Range (0f, 1f) < ChanceOfPowerBoost) {
-			//CreateObstacle(true, 0, PowerBoostPrefab);
-			ChanceOfPowerBoost = .12f;
-		}
-
-
 		CreateLaneDividers(maxObstacleDifficulty - 1);
 	}
 

@@ -11,11 +11,12 @@ public class TimeController : MonoBehaviour {
 	private bool exitingSlowMo = false;
 	public const float timeToFast = .4f;
 	public const float timeToSlow = .8f;
-	public const float slowScale = .2f;
+	public const float slowScale = .1f;
 	public const float distanceBeforeWallToStartSlowMo = 70f;
 	private float timeCounter;
 	public PlayerController Player;
 	public Text PauseButtonText;
+	public LevelController LevelController;
 
 	void Awake() {
 		EnterSlowMotionPosition = 999999999f;
@@ -32,13 +33,16 @@ public class TimeController : MonoBehaviour {
 				ExitSlowMotion();
 			}
 			if(enteringSlowMo) {
-				timeCounter += Time.deltaTime;
+				/*timeCounter += Time.deltaTime;
 				if(timeCounter >= timeToSlow) {
 					enteringSlowMo = false;
 					Time.timeScale = slowScale;
 				} else {
 					Time.timeScale = Mathf.Lerp(1f, slowScale, timeCounter/timeToSlow);
-				}
+				}*/
+				float extra = (1f - PercentToWall()) * (1f - slowScale);
+				Debug.Log(extra);
+				Time.timeScale = slowScale + extra;
 			}
 
 			if(exitingSlowMo) {
@@ -53,6 +57,11 @@ public class TimeController : MonoBehaviour {
 		} else {
 			Time.timeScale = 0f;
 		}
+	}
+
+	float PercentToWall() {
+		float playerX = Player.transform.position.x;
+		return (playerX - (LevelController.CurrentWallPosition - distanceBeforeWallToStartSlowMo)) / (distanceBeforeWallToStartSlowMo);
 	}
 
 	public void EnterSlowMotion() {

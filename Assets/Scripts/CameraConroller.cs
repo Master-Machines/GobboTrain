@@ -28,9 +28,9 @@ public class CameraConroller : MonoBehaviour {
 	}
 
 	void UpdateCameraSlowMo() {
+		float playerPosition = Player.transform.position.x;
 		float delta = Time.timeScale - TimeController.slowScale;
 		float SlowPercent = 1f - ((maxDelta - delta) / maxDelta);
-		Debug.Log (SlowPercent);
 		camera.fieldOfView = MinCameraFOV + (SlowPercent * (TargetCameraFOV - MinCameraFOV));
 	}
 

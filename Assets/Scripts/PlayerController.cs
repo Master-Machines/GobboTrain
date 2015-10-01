@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public const float MiddleLanePosition = 0f;
 	public const float RightLanePosition = -5f;
 	private const float ExtraLaneSwitchTime = 0f;
-	private const float MinLaneSwitchTime = .1f;
+	private const float MinLaneSwitchTime = .115f;
 	public float ModerateSpeed = 35f;
 	public float MaxSpeed = 55f;
 	public const float GodSpeed = 85f;
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void UpdatePosition() {
-		transform.Translate(new Vector3(5f + Speed + BonusSpeed, 0f, 0f) * Time.deltaTime);
+		transform.Translate(new Vector3(Speed + BonusSpeed, 0f, 0f) * Time.deltaTime);
 		if(SwitchingLanes) {
 			LaneSwitchCounter += Time.deltaTime;
 			if(LaneSwitchCounter >= LaneSwitchTime) {
@@ -176,17 +176,26 @@ public class PlayerController : MonoBehaviour {
 		if(!InputPressed && !SwitchingLanes) {
 			if(type == SwipeDetector.SwipeType.Left) {
 				SwitchLanes(-1);
-			} else if(type == SwipeDetector.SwipeType.Right) {
+			} else if(type == SwipeDetector.SwipeType.LeftLong) {
+				SwitchLanes(-2);
+			}else if(type == SwipeDetector.SwipeType.Right) {
 				SwitchLanes(1);
+			} else if(type == SwipeDetector.SwipeType.RightLong) {
+				SwitchLanes(2);
 			}
 		}
 	}
 
 	void SwitchLanes(int direction) {
-		if( (CurrentLane == Lane.Left && direction == -1) || (CurrentLane == Lane.Right && direction == 1) ) {
+		if( (CurrentLane == Lane.Left && direction < 0) || (CurrentLane == Lane.Right && direction > 0) ) {
 			// User is trying to move to a lane that doesn't exist... tisk tisk
 		} else {
-			TargetLane = (Lane)((int)CurrentLane + direction);
+			int targetLane = (int)CurrentLane + direction;
+			if(targetLane < -1)
+				targetLane = -1;
+			else if(targetLane > 1)
+				targetLane = 1;
+			TargetLane = (Lane)(targetLane);
 			LaneSwitchCounter = 0f;
 			SwitchingLanes = true;
 			InputPressed = true;

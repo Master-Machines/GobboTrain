@@ -20,6 +20,7 @@ public class LevelController : MonoBehaviour {
 	public int MaxObstacleDifficulty;
 
 	public int NextWallPosition;
+	public int CurrentWallPosition;
 	public const int WallWarningDistance = 350;
 	private int wallCounter = 0;
 	public int WallHealth;
@@ -62,6 +63,7 @@ public class LevelController : MonoBehaviour {
 				TextMesh text = createdWall.GetComponentInChildren<TextMesh>();
 				text.text = "wall " + wallCounter.ToString();
 				ob.RequiredMomentum = WallHealth;
+				CurrentWallPosition = NextWallPosition;
 				TimeController.EnterSlowMotionPosition = NextWallPosition - TimeController.distanceBeforeWallToStartSlowMo;
 			}
 		}

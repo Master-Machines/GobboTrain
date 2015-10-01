@@ -7,23 +7,28 @@ public class SwipeDetector : MonoBehaviour {
 
 	public enum SwipeType{
 		Up,
+		UpLong,
 		Down,
+		DownLong,
 		Left,
-		Right
+		LeftLong,
+		Right,
+		RightLong
 	}
 
 	public List<Action<SwipeType>> SwipeEvents = new List<Action<SwipeType>>();
 
 	private float maxSwipeTime = 1f;
 	private float minSwipeTime = .065f;
-	private float minSwipeDist  = 40.0f;
+	private float minShortSwipe  = 0.2f;
+	private float minLongSwipe = 1f;
 
 	private float fingerStartTime = 0f;
 	private Vector2 fingerStartPos;
 	private bool isSwipe = false;
 
 	void Start () {
-	
+
 	}
 
 	void Update () {
@@ -45,14 +50,17 @@ public class SwipeDetector : MonoBehaviour {
 					/* The touch is being canceled */
 					isSwipe = false;
 					break;
-					
-				case TouchPhase.Moved :
 				case TouchPhase.Ended :
 					
 					float gestureTime = Time.unscaledTime - fingerStartTime;
 					float gestureDist = (touch.position - fingerStartPos).magnitude;
-					
-					if (isSwipe && (gestureTime > minSwipeTime || touch.phase == TouchPhase.Ended) && gestureDist > minSwipeDist){
+					int state = 0;
+					float inces = InchesFromPixels(gestureDist);
+					if(inces > minLongSwipe)
+						state = 2;
+					else if(inces > minShortSwipe)
+						state = 1;
+					if (isSwipe && state > 0){
 						Vector2 direction = touch.position - fingerStartPos;
 						Vector2 swipeType = Vector2.zero;
 						
@@ -67,11 +75,11 @@ public class SwipeDetector : MonoBehaviour {
 						if(swipeType.x != 0.0f){
 							if(swipeType.x > 0.0f){
 								// MOVE RIGHT
-								SwipeHappened(SwipeType.Right);
+								SwipeHappened(state == 1 ? SwipeType.Right : SwipeType.RightLong);
 								fingerStartPos = touch.position;
 							}else{
 								// MOVE LEFT
-								SwipeHappened(SwipeType.Left);
+								SwipeHappened(state == 1 ? SwipeType.Left : SwipeType.LeftLong);
 								fingerStartPos = touch.position;
 							}
 						}
@@ -94,6 +102,13 @@ public class SwipeDetector : MonoBehaviour {
 
 			}
 		}
+	}
+
+	float InchesFromPixels(float pixels) {
+		float dpi = Screen.dpi;
+		if(dpi == 0)
+			dpi = 100f;
+		return pixels / (float)dpi;
 	}
 
 	void SwipeHappened(SwipeType type) {
