@@ -5,8 +5,8 @@ public class CameraConroller : MonoBehaviour {
 	public PlayerController Player;
 	public TimeController TimeController;
 	public Camera camera;
-	private const float MinCameraFOV = 40f;
-	private const float BonusCameraFOV = 20f;
+	private const float MinCameraFOV = 45f;
+	private const float BonusCameraFOV = 15f;
 	private const float CameraFOVAdjustmentSpeed = 25f;
 	private float maxDelta;
 

@@ -34,8 +34,8 @@ public class GameController : MonoBehaviour {
 
 	public void IncreaseCurrency(int amount) {
 		SessionCurrency += amount;
-		CurrencyDisplay.text = SessionCurrency.ToString() + "G"; 
-		NewPointsDisplay.text = "+" + (amount).ToString() + "G";
+		CurrencyDisplay.text = SessionCurrency.ToString() + " G"; 
+		NewPointsDisplay.text = "+" + (amount).ToString() + " G";
 		CancelInvoke("HideNewPoints");
 		Invoke ("HideNewPoints", .5f);
 	}
@@ -72,7 +72,6 @@ public class GameController : MonoBehaviour {
 
 	void HideUI(bool show) {
 		ScoreDisplay.gameObject.SetActive(show);
-		PowerDisplay.gameObject.SetActive(show);
 		//SpeedDisplay.gameObject.SetActive(show);
 		MultiplierDisplay.gameObject.SetActive(show);
 		NewPointsDisplay.gameObject.SetActive(show);
@@ -89,16 +88,6 @@ public class GameController : MonoBehaviour {
 	public void Win() {
 		WinController.gameObject.SetActive(true);
 		WinController.Display();
-	}
-
-	public void HighlightPower(bool Increased) {
-		if(Increased) {
-			PowerDisplay.color = new Color(0f, 1f, 0f);
-		} else {
-			PowerDisplay.color = new Color(1f, 0, 0f);
-		}
-		CancelInvoke("UnhighlightPower");
-		Invoke("UnhighlightPower", .35f);
 	}
 
 	public void DisplayWallWarning() {
@@ -119,10 +108,6 @@ public class GameController : MonoBehaviour {
 		WallWarning.gameObject.SetActive(false);
 	}
 
-	void UnhighlightPower() {
-		PowerDisplay.color = new Color(0f, 0.8f, 0f);
-	}
-
 	// Update is called once per frame
 	void Update () {
 		UpdateText();
@@ -134,11 +119,6 @@ public class GameController : MonoBehaviour {
 		string powerString = (power/10f).ToString();
 		if(PlayerController.MomentumBonuses % 10 > 0) {
 			powerString = powerString.Substring(0, powerString.IndexOf('.') + 2);
-		}
-		if(PlayerController.CurrentGoblins == 0) {
-			PowerDisplay.text = "1 goblin";
-		} else {
-			PowerDisplay.text = (1 + PlayerController.CurrentGoblins).ToString() + " goblins";
 		}
 
 		int speed = (int)PlayerController.GetSpeed();

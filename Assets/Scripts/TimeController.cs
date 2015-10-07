@@ -10,7 +10,7 @@ public class TimeController : MonoBehaviour {
 	private bool enteringSlowMo = false;
 	private bool exitingSlowMo = false;
 	public const float timeToFast = .4f;
-	public const float timeToSlow = .8f;
+	public const float timeToSlow = .25f;
 	public const float slowScale = .1f;
 	public const float distanceBeforeWallToStartSlowMo = 70f;
 	private float timeCounter;

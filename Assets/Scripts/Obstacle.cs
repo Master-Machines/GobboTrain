@@ -12,20 +12,27 @@ public class Obstacle : MonoBehaviour {
 	public Material GoldMaterial;
 	public bool IsGold {get; private set;}
 	public GameObject GoldParticles;
-
+	public PlayerController Player {get;set;}
 	public GameObject ExplosionParticles;
 	private const float GoldChance = 0.07f;
 	public static bool PureGold = false;
 
 	// Use this for initialization
-	IEnumerator Start () {
+	void Start () {
 		if(AllowGold && (Random.Range (0f, 1f) < GoldChance || PureGold)) {
 			GoGold();
 		}
 
 		transform.Translate(new Vector3(0f, yAdjustment, 0f));
-		yield return new WaitForSeconds(10f);
-		Destroy(gameObject);
+	}
+
+	private int UpdateCounter = 0;
+	void Update() {
+		if(UpdateCounter++ > 20) {
+			UpdateCounter = 0;
+			if(Player && Player.transform.position.x > transform.position.x + 5f)
+				Destroy(gameObject);
+		}
 	}
 
 	public void GoGold() {

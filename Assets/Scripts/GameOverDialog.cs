@@ -5,7 +5,6 @@ using System;
 
 public class GameOverDialog : DialogController {
 	public Text CurrencyDisplay;
-	public Text ScoreBonus;
 	public Text Score;
 	public Text HighScore;
 	public Text TotalCurrency;
@@ -18,23 +17,16 @@ public class GameOverDialog : DialogController {
 		int time = (int)GameController.TimePLayed;
 		TimeSpan timeSpan = TimeSpan.FromSeconds((double)time);
 		Score.text = string.Format("{0:#,##0}", GameController.Score); 
-		CurrencyDisplay.text = "Destruction: " + GameController.SessionCurrency.ToString() + "c";
+		CurrencyDisplay.text = "" + GameController.SessionCurrency.ToString() + " g";
 		Global.Instance.currency += GameController.SessionCurrency;
 		if(Global.Instance.highScore < GameController.Score) {
 			Global.Instance.highScore = GameController.Score;
 			HighScore.gameObject.SetActive(true);
 		}
 
-		DetermineCurrencyBonus();
 
-		TotalCurrency.text = Global.Instance.currency.ToString() + "c";
+		TotalCurrency.text = Global.Instance.currency.ToString() + " g";
 
 		Global.Instance.Save();
-	}
-
-	void DetermineCurrencyBonus() {
-		int bonus = (int)(GameController.Score / 2000);
-		ScoreBonus.text = "Score Bonus: " + bonus.ToString() + "c";
-		Global.Instance.currency += bonus;
 	}
 }

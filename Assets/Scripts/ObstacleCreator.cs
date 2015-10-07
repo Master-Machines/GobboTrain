@@ -92,6 +92,7 @@ public class ObstacleCreator : MonoBehaviour {
 			
 			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition + Random.Range (-3.5f, 3.5f), transform.position.y, position), Quaternion.identity);
 			createdObj.transform.SetParent(this.transform);
+			createdObj.GetComponent<Obstacle>().Player = PlayerController;
 		}
 	}
 

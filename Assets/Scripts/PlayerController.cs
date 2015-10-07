@@ -258,9 +258,9 @@ public class PlayerController : MonoBehaviour {
 				obstacle.Break();
 				float amountOver = DangerLevelForObstacle(obstacle.RequiredMomentum);
 				float speedModifer = (1f - (obstacle.RequiredMomentum * 1.5f) / DetermineMomentum());
-				if(speedModifer < .4f)
-					speedModifer = .4f;
-				Speed *= speedModifer;
+				if(speedModifer < .25f)
+					speedModifer = .25f;
+
 				if(obstacle.IsGold)
 					GameController.IncreaseCurrency(obstacle.CurrencyBonus);
 				// GameController.IncreaseScore((int)Mathf.Pow (obstacle.RequiredMomentum, 1.5f));
@@ -269,9 +269,12 @@ public class PlayerController : MonoBehaviour {
 					LevelController.WallDestroyed();
 					CreateRagdolls();
 					CurrentGoblins = 0;
-					GameController.HighlightPower(false);
 					SetExtraGobbos();
+					if(speedModifer < .75f)
+						speedModifer = .75f;
 				}
+
+				Speed *= speedModifer;
 			} else {
 				ImpactSpeed = Speed;
 				Speed = 0;
@@ -289,7 +292,6 @@ public class PlayerController : MonoBehaviour {
 
 			if(CurrentGoblins < MaxGoblins) {
 				CurrentGoblins += 1;
-				GameController.HighlightPower(true);
 				SetExtraGobbos();
 			}
 			Destroy(other.gameObject);
@@ -304,7 +306,6 @@ public class PlayerController : MonoBehaviour {
 			//MomentumBonuses--;
 			//GameController.HighlightPower(false);
 			MomentumBonuses ++;
-			GameController.HighlightPower(true);
 			Destroy(other.gameObject);
 			GameObject obj = (GameObject)Instantiate(MultiplierPickupExplosion, transform.position, Quaternion.identity);
 			obj.transform.parent = transform;

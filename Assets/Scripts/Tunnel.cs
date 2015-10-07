@@ -18,7 +18,7 @@ public class Tunnel : MonoBehaviour {
 		LevelController = levelController;
 		// CreateLaneObstacles(obstacleCount, maxObstacleDifficulty);
 		CreateEnvironment();
-		CreateLaneDividers(maxObstacleDifficulty - 1);
+		CreateLaneDividers(4);
 	}
 
 	void CreateLaneObstacles(int obstacleCount, int maxObstacleDifficulty) {
@@ -31,7 +31,7 @@ public class Tunnel : MonoBehaviour {
 	}
 
 	void CreateLaneDividers(int max) {
-		int maxDivider = Random.Range(0, 5);
+		int maxDivider = Random.Range(0, 3);
 		for(int i = 0; i < maxDivider; i++) {
 			CreateLaneDividerObstacle(max);
 		}
@@ -85,7 +85,7 @@ public class Tunnel : MonoBehaviour {
 	void CreateLaneDividerObstacle(int max) {
 		Vector3 SelectedPosition = GetRandomLaneDividerSpawnPosition();
 		int failSafe = 10;
-		while(PositionIsNearOtherObstacles(SelectedPosition, false) && failSafe-- > 0) {
+		while(PositionIsNearOtherObstacles(SelectedPosition, true) && failSafe-- > 0) {
 			SelectedPosition = GetRandomLaneDividerSpawnPosition();
 		}
 		
