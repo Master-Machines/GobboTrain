@@ -17,15 +17,15 @@ public class GameOverDialog : DialogController {
 		int time = (int)GameController.TimePLayed;
 		TimeSpan timeSpan = TimeSpan.FromSeconds((double)time);
 		Score.text = string.Format("{0:#,##0}", GameController.Score); 
-		CurrencyDisplay.text = "" + GameController.SessionCurrency.ToString() + " g";
+		CurrencyDisplay.text = "" + GameController.SessionCurrency.ToString() + " c";
 		Global.Instance.currency += GameController.SessionCurrency;
 		if(Global.Instance.highScore < GameController.Score) {
 			Global.Instance.highScore = GameController.Score;
 			HighScore.gameObject.SetActive(true);
 		}
 
-
-		TotalCurrency.text = Global.Instance.currency.ToString() + " g";
+		Time.timeScale = 1f;
+		TotalCurrency.text = Global.Instance.currency.ToString() + " c";
 
 		Global.Instance.Save();
 	}

@@ -16,9 +16,11 @@ public class ObstacleCreator : MonoBehaviour {
 	public GameObject PowerBoostPrefab;
 	public GameObject SpeedBoostPrefab;
 	public GameObject GoblinPrefab;
+	public GameObject RunnerPrefab;
 
 	public static float ChanceOfGoblin = 0f;
 	public static float ChanceOfSpeed = 0f;
+	public static float ChanceOfRunner = 0f;
 
 	public int MinimumNumberOfObstacles {get;set;}
 	public int MaximumNumberOfObstacles {get;set;}
@@ -70,6 +72,12 @@ public class ObstacleCreator : MonoBehaviour {
 				CreatePowerup(i);
 		}
 
+		ChanceOfRunner += .005f;
+		if(Random.Range (0f, 1f) < ChanceOfRunner) {
+			GameObject runner = (GameObject)Instantiate(RunnerPrefab, new Vector3(CurrentRowPosition, -3.195f, Random.Range (PlayerController.RightLanePosition, PlayerController.LeftLanePosition)), Quaternion.Euler(new Vector3(0f, 90f, 0f)));
+			ChanceOfRunner = 0.01f;
+			runner.transform.SetParent(transform);
+		}
 
 		CurrentRowPosition += RowDistance * Random.Range (.9f, 1.1f);
 	}
@@ -99,9 +107,10 @@ public class ObstacleCreator : MonoBehaviour {
 	void CreatePowerup(int lane) {
 		float position = GetPositionFromLane(lane);
 		Vector3 spawnPosition = new Vector3(CurrentRowPosition + Random.Range (-3.5f, 3.5f), transform.position.y, position);
-		ChanceOfGoblin += .02f;
 		ChanceOfSpeed += .02f;
+		ChanceOfGoblin += .02f;
 		GameObject createdObj = null;
+
 		if(Random.Range(0f, 1f) < ChanceOfGoblin) {
 			createdObj = (GameObject)Instantiate(GoblinPrefab, spawnPosition, Quaternion.identity);
 			ChanceOfGoblin = .03f;

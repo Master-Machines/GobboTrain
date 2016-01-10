@@ -9,14 +9,14 @@ public class PlayerController : MonoBehaviour {
 	public const float MiddleLanePosition = 0f;
 	public const float RightLanePosition = -5f;
 	private const float ExtraLaneSwitchTime = 0f;
-	private const float MinLaneSwitchTime = .115f;
+	private const float MinLaneSwitchTime = .15f;
 	public float ModerateSpeed = 35f;
 	public float MaxSpeed = 55f;
 	public const float GodSpeed = 85f;
 
 	private const float SpeedBoostBonus = 15f;
 	private const float SpeedBoostTime = 3f;
-	private const float BombDistance = 150f;
+	private const float BombDistance = 50f;
 	private const float LeftTilt = -.185f;
 	private const float RightTilt = .185f;
 
@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour {
 	private bool InputPressed = false;
 	private float LaneSwitchTime = .4f;
 	public GameController GameController;
+	private float delayCounter = 0f;
+	private float postPowerCounter = 0f;
 
 	private float LaneSwitchCounter = 0f;
 	private Lane TargetLane;
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject RagdollPrefab;
 	public SwipeDetector SwipeDetector;
+	public PowerController PowerController;
 
 	// Use this for initialization
 	void Start () {
@@ -71,13 +74,13 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!Dead && !Global.Instance.isPaused) {
+		if(!Dead && !TimeController.IsPaused) {
 			UpdatePosition();
 			CheckInput();
 			UpdateSpeed(true);
 			//UpdateObstacleMaterials();
 			if(Input.GetButtonDown("Jump") && Bombs-- > 0) {
-				Bomb();
+				PowerController.AttemptPower();
 			}
 		}
 	}
@@ -136,35 +139,46 @@ public class PlayerController : MonoBehaviour {
 
 	void CheckInput() {
 		float xAxis = Input.GetAxis("Horizontal");
-		if(!InputPressed && !SwitchingLanes) {
 
-			if(!Global.Instance.tiltEnabled) {
-				if(xAxis < -.1f) {
-					SwitchLanes(-1);
-				} else if(xAxis > .1f) {
-					SwitchLanes(1);
-				} else if(Input.GetMouseButton(0) && !SwitchingLanes && Input.mousePosition.y < Screen.height - 100f) {
-					/*if(Input.mousePosition.x > Screen.width/2f) {
-						SwitchLanes(1);
-					}else {
-						SwitchLanes(-1);
-					}*/
+		if(postPowerCounter > 0f) {
+			postPowerCounter -= Time.deltaTime;
+			if(postPowerCounter < 0)
+				postPowerCounter = 0f;
+		}
+
+		if(Input.touchCount > 1) {
+			if(PowerController.AttemptPower()) {
+				postPowerCounter = .1f;
+			}
+		} else if(!InputPressed && !SwitchingLanes) {
+
+			if( postPowerCounter == 0f && Input.touchCount > 0) {
+				if(delayCounter < 0f) {
+					delayCounter = .035f;
 				}
-			} else {
-				float tilt = Input.acceleration.x;
-				if(tilt < LeftTilt) {
-					SwitchLanes(-1);
-				} else if(tilt > RightTilt) {
-					SwitchLanes(1);
-				} else {
-					if(CurrentLane == Lane.Left) {
-						SwitchLanes(1);
-					} else if(CurrentLane == Lane.Right) {
-						SwitchLanes(-1);
+
+				if(delayCounter > 0) {
+					delayCounter -= Time.deltaTime;
+					if(delayCounter < 0)
+						delayCounter = 0f;
+				}
+
+				if(delayCounter == 0f) {
+					 if(Input.GetMouseButton(0) && !SwitchingLanes && Input.mousePosition.y < Screen.height - 100f && Input.mousePosition.y > 80f) {
+						if(Input.mousePosition.x > Screen.width/2f) {
+							SwitchLanes(1);
+						}else {
+							SwitchLanes(-1);
+						}
 					}
 				}
 			}
+		}
 
+		if(xAxis < -.1f) {
+			SwitchLanes(-1);
+		} else if(xAxis > .1f) {
+			SwitchLanes(1);
 		}
 
 		if(RoughlyEqual(xAxis, 0f, .02f)) {
@@ -199,6 +213,7 @@ public class PlayerController : MonoBehaviour {
 			LaneSwitchCounter = 0f;
 			SwitchingLanes = true;
 			InputPressed = true;
+			delayCounter = -1f;
 		}
 	}
 
@@ -309,6 +324,10 @@ public class PlayerController : MonoBehaviour {
 			Destroy(other.gameObject);
 			GameObject obj = (GameObject)Instantiate(MultiplierPickupExplosion, transform.position, Quaternion.identity);
 			obj.transform.parent = transform;
+		} else if(other.gameObject.CompareTag("Runner")) {
+			other.gameObject.GetComponent<RunningGobbo>().Death(transform);
+			PowerController.EnablePowerup(true);
+			GameController.IncreaseScore(10);
 		}
 	}
 
@@ -316,6 +335,10 @@ public class PlayerController : MonoBehaviour {
 		Speed += SpeedBoostBonus;
 		//CancelInvoke("SpeedBoostOver");
 		//Invoke ("SpeedBoostOver", SpeedBoostTime);
+	}
+
+	public void SpeedPower() {
+		Speed += SpeedBoostBonus * 2f;
 	}
 
 	void SpeedBoostOver() {
@@ -326,7 +349,7 @@ public class PlayerController : MonoBehaviour {
 		return (Speed + BonusSpeed) * (1 + MomentumBonuses * .1f + CurrentGoblins * GoblinPowerBonus);
 	}
 
-	void Bomb() {
+	public void Bomb() {
 		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
 		foreach(GameObject obj in obstacles) {
 

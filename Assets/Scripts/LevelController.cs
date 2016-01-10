@@ -24,16 +24,22 @@ public class LevelController : MonoBehaviour {
 	public const int WallWarningDistance = 350;
 	private int wallCounter = 0;
 	public int WallHealth;
+	private int WallHealthIncreaseAmount;
+	private int WallHealthIncreaseDecreaseAmount;
+	private int MinWallHealthIncreaseAmount;
 	public bool WallActive = false;
 	public ObstacleCreator ObstacleCreator;
 
 	// Use this for initialization
 	void Start () {
 		NextWallPosition += 1400;
-		WallHealth = 120;
+		WallHealth = 70;
 		MinObstacles = 0;
 		MaxObstacles = 2;
 		MaxObstacleDifficulty = 1;
+		MinWallHealthIncreaseAmount = 5;
+		WallHealthIncreaseDecreaseAmount = 3;
+		MinWallHealthIncreaseAmount = 19;
 		CurrentPosition = transform.position;
 		for(int i = 0; i < 5; i++) {
 			if(i == 0)
@@ -70,7 +76,11 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void WallDestroyed() {
-		WallHealth += 5;
+		WallHealth += WallHealthIncreaseAmount;
+		WallHealthIncreaseAmount -= WallHealthIncreaseDecreaseAmount;
+		if(WallHealthIncreaseAmount < MinWallHealthIncreaseAmount)
+			MinWallHealthIncreaseAmount = MinWallHealthIncreaseAmount;
+
 		TimeController.WallDestroyed = true;
 		NextWallPosition += 1400 - (40 * wallCounter);
 		WallActive = false;

@@ -19,6 +19,7 @@ public class Obstacle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		RequiredMomentum = RequiredMomentum * GameController.DifficultyModifier;
 		if(AllowGold && (Random.Range (0f, 1f) < GoldChance || PureGold)) {
 			GoGold();
 		}
@@ -46,7 +47,7 @@ public class Obstacle : MonoBehaviour {
 			goldP.GetComponent<ParticleSystem>().emissionRate = RequiredMomentum;
 			goldP.transform.SetParent(transform);
 			goldP.transform.Translate(Vector3.up);
-			RequiredMomentum *= .8f;
+			RequiredMomentum *= .2f;
 			IsGold = true;
 		}
 	}

@@ -31,7 +31,7 @@ public class SwipeDetector : MonoBehaviour {
 
 	}
 
-	void Update () {
+	void UpdateOff(){//Update () {
 		if (Input.touchCount > 0 && !TimeController.IsPaused){
 			foreach (Touch touch in Input.touches)
 			{

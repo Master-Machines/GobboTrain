@@ -5,11 +5,9 @@ using System;
 
 public class StartGameDialog : DialogController {
 
-	public Toggle TiltToggle;
 	public Text Total;
 
 	void Start() {
-		TiltToggle.isOn = Global.Instance.tiltEnabled;
 		Total.text = Global.Instance.currency.ToString() + "c";
 	}
 
@@ -20,5 +18,9 @@ public class StartGameDialog : DialogController {
 		} else {
 			Screen.orientation = ScreenOrientation.AutoRotation;
 		}
+	}
+
+	public void GoToShop() {
+		Application.LoadLevel("Store");
 	}
 }

@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour {
 	public Text NewPointsDisplay;
 	public Text WallWarning;
 
+	// Modifies the required momentum.
+	public const float DifficultyModifier = 1.5f;
+
 	public int Score {get;set;}
 	public WinController WinController;
 	public PlayerController PlayerController;
