@@ -27,12 +27,13 @@ public class GameController : MonoBehaviour {
 
 
 	void Start() {
-		Pause ();
-		HideUI(false);
-		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
-			UnPause();
-			HideUI (true);
-		});
+//		Pause ();
+//		HideUI(false);
+//		UnPause();
+//		HideUI (true);
+//		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
+//			
+//		});
 	}
 
 	public void IncreaseCurrency(int amount) {
