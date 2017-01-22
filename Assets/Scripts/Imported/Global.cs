@@ -5,16 +5,17 @@ using System.Reflection;
 // Variables that are persisted
 public class Global {
 
-	public int currency = 0;
+	public int currency = 0	;
 	public int highScore = 0;
+	public int lastScore { get; set; }
 	public bool isPaused = false;
 	public bool tiltEnabled = false;
 
-	public int SelectedPowerup = 1;
-	public int SelectedSpecialty = 0;
+	public int SelectedPowerup = 3;
+	public int SelectedSpecialty = 3;
 
 	// shockwave 
-	public int Powerup1Level = 1;
+	public int Powerup1Level = 0;
 	// boost
 	public int Powerup2Level = 0;
 	// goldrush

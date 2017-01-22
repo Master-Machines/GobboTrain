@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour {
 	private float Speed = 0f;
 	private float BonusSpeed = 0f;
 
+	public AudioClip gobboSmashSmall, gobboSmashMed, gobboSmash, gobboOnGobbo, footHit;
+	public AudioSource soundSource;
+
 	public const float LeftLanePosition = 5f;
 	public const float MiddleLanePosition = 0f;
 	public const float RightLanePosition = -5f;
@@ -86,12 +89,12 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void UpdateSpeed(bool on) {
-		if(Speed < ModerateSpeed) {
-			Speed += Time.deltaTime * 10f;
+		if(Speed < ModerateSpeed) { // HERE IS WHERE RUNNER CLASS IS USED
+			Speed += (Time.deltaTime * 10f + (Global.Instance.Specialty3Level * 0.2f));
 		} else if(Speed < MaxSpeed) {
-			Speed += Time.deltaTime * 5f;
+			Speed += Time.deltaTime * 5f + (Global.Instance.Specialty3Level * 0.2f);
 		} else if (Speed < GodSpeed) {
-			Speed += Time.deltaTime * 1f;
+			Speed += Time.deltaTime * 1f + (Global.Instance.Specialty3Level * 0.2f);
 		} else {
 			Speed *= .99f;
 		}
@@ -223,15 +226,12 @@ public class PlayerController : MonoBehaviour {
 			Color color;
 			if(danger > 3.5f) {
 				color = Color.black;
-				//color = new Color(0f, .25f, 0f);
 			} else if(danger < 1f) {
 				color = new Color(.3f, 0f, 0f);
 			} else if(danger < 2f){
 				color = Color.black;
-				//color = new Color(.25f, .12f, 0f);
 			} else {
 				color = Color.black;
-				//color = new Color(.25f, .25f, 0f);
 			}
 			ObstacleMaterials[i].EnableKeyword ("_EMISSION");
 			ObstacleMaterials[i].SetColor("_EmissionColor", color);
@@ -269,6 +269,53 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Wall")) {
 			Obstacle obstacle = other.gameObject.GetComponent<Obstacle>();
+			
+			switch(obstacle.gameObject.name)
+			{
+				// Small
+				case "obstacle_barricade(Clone)":
+					soundSource.PlayOneShot(gobboSmashSmall);
+					break;
+				case "obstacle_block(Clone)":
+					soundSource.PlayOneShot(gobboSmashSmall);
+					break;
+				case "obstacle_rockSmall(Clone)":
+					soundSource.PlayOneShot(gobboSmashSmall);
+					break;
+				case "obstacle_stalagmite(Clone)":
+					soundSource.PlayOneShot(gobboSmashSmall);
+					break;
+				// Medium
+				case "obstacle_block_mega(Clone)":
+					soundSource.PlayOneShot(gobboSmashMed);
+					break;
+				case "obstacle_hut(Clone)":
+					soundSource.PlayOneShot(gobboSmashMed);
+					break;
+				case "obstacle_rockMedium(Clone)":
+					soundSource.PlayOneShot(gobboSmashMed);
+					break;
+				case "obstacle_stalagmite_column(Clone)":
+					soundSource.PlayOneShot(gobboSmashMed);
+					break;
+				// Large
+				case "obstacle_rockLarge(Clone)":
+					soundSource.PlayOneShot(gobboSmash);
+					break;
+				case "obstacle_stalagmite_column_giant(Clone)":
+					soundSource.PlayOneShot(gobboSmash);
+					break;
+				case "Wall one(Clone)":
+					soundSource.PlayOneShot(gobboSmash);
+					break;
+				case "Wall two(Clone)":
+					soundSource.PlayOneShot(gobboSmash);
+					break;
+				case "Wall three(Clone)":
+					soundSource.PlayOneShot(gobboSmash);
+					break;
+			}
+
 			if(DetermineMomentum() > obstacle.RequiredMomentum) {
 				obstacle.Break();
 				float amountOver = DangerLevelForObstacle(obstacle.RequiredMomentum);
@@ -304,14 +351,15 @@ public class PlayerController : MonoBehaviour {
 			}
 		} else if(other.gameObject.CompareTag("Powerup")) {
 			// Momentum powerup
-
-			if(CurrentGoblins < MaxGoblins) {
+			soundSource.PlayOneShot(gobboOnGobbo);
+			if (CurrentGoblins < MaxGoblins) {
 				CurrentGoblins += 1;
 				SetExtraGobbos();
 			}
 			Destroy(other.gameObject);
 		} else if(other.gameObject.CompareTag("SpeedPowerup")) {
 			//BonusSpeed += SpeedBoostBonus;
+			soundSource.PlayOneShot(gobboOnGobbo);
 			SpeedBoost();
 			//Speed *= .9f;
 			Destroy(other.gameObject);
@@ -319,6 +367,7 @@ public class PlayerController : MonoBehaviour {
 			obj.transform.parent = transform;
 		} else if(other.gameObject.CompareTag("PowerBoost")) {
 			//MomentumBonuses--;
+			soundSource.PlayOneShot(gobboOnGobbo);
 			//GameController.HighlightPower(false);
 			MomentumBonuses ++;
 			Destroy(other.gameObject);
@@ -326,6 +375,7 @@ public class PlayerController : MonoBehaviour {
 			obj.transform.parent = transform;
 		} else if(other.gameObject.CompareTag("Runner")) {
 			other.gameObject.GetComponent<RunningGobbo>().Death(transform);
+			soundSource.PlayOneShot(gobboOnGobbo);
 			PowerController.EnablePowerup(true);
 			GameController.IncreaseScore(10);
 		}
@@ -345,7 +395,7 @@ public class PlayerController : MonoBehaviour {
 		BonusSpeed = 0f;
 	}
 
-	float DetermineMomentum() {
+	public float DetermineMomentum() {
 		return (Speed + BonusSpeed) * (1 + MomentumBonuses * .1f + CurrentGoblins * GoblinPowerBonus);
 	}
 
@@ -356,6 +406,19 @@ public class PlayerController : MonoBehaviour {
 			if(Vector3.Distance(transform.position, obj.transform.position) < BombDistance) {
 				Obstacle ob = obj.GetComponent<Obstacle>();
 				ob.Break();
+			}
+		}
+	}
+
+	public void AllGold()
+	{
+		GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+		foreach(GameObject obj in obstacles)
+		{
+			if(Vector3.Distance(transform.position, obj.transform.position) < BombDistance)
+				{
+				Obstacle ob = obj.GetComponent<Obstacle>();
+				ob.GoGold();
 			}
 		}
 	}

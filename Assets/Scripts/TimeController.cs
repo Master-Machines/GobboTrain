@@ -18,6 +18,8 @@ public class TimeController : MonoBehaviour {
 	public Text PauseButtonText;
 	public LevelController LevelController;
 
+	public Button howTo;
+
 	void Awake() {
 		EnterSlowMotionPosition = 999999999f;
 	}
@@ -25,7 +27,8 @@ public class TimeController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!IsPaused) {
-			if(Player.transform.position.x > EnterSlowMotionPosition) {
+			howTo.gameObject.SetActive(IsPaused);
+			if (Player.transform.position.x > EnterSlowMotionPosition) {
 				EnterSlowMotion();
 				EnterSlowMotionPosition = 999999999f;
 			} else if(WallDestroyed) {
@@ -41,7 +44,6 @@ public class TimeController : MonoBehaviour {
 					Time.timeScale = Mathf.Lerp(1f, slowScale, timeCounter/timeToSlow);
 				}*/
 				float extra = (1f - PercentToWall()) * (1f - slowScale);
-				Debug.Log(extra);
 				Time.timeScale = slowScale + extra;
 			}
 
@@ -55,6 +57,7 @@ public class TimeController : MonoBehaviour {
 				}
 			}
 		} else {
+			howTo.gameObject.SetActive(IsPaused);
 			Time.timeScale = 0f;
 		}
 	}
@@ -81,8 +84,10 @@ public class TimeController : MonoBehaviour {
 
 	public static void Pause(bool pause) {
 		IsPaused = pause;
+		
 		Time.timeScale = IsPaused ? 0f : 1;
 	}
+	
 
 	// for Buttons
 	public void TogglePause() {

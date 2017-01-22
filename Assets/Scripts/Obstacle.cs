@@ -14,12 +14,13 @@ public class Obstacle : MonoBehaviour {
 	public GameObject GoldParticles;
 	public PlayerController Player {get;set;}
 	public GameObject ExplosionParticles;
-	private const float GoldChance = 0.07f;
+	private float GoldChance = 0.07f;
 	public static bool PureGold = false;
 
 	// Use this for initialization
 	void Start () {
-		RequiredMomentum = RequiredMomentum * GameController.DifficultyModifier;
+		RequiredMomentum = RequiredMomentum * GameController.DifficultyModifier - (Global.Instance.Specialty1Level * 0.25f); // HERE IS WHERE TANK CLASS IS USED
+		GoldChance += (Global.Instance.Specialty2Level * 0.03f); // HERE IS WHERE THE MERCHANT CLASS IS USED
 		if(AllowGold && (Random.Range (0f, 1f) < GoldChance || PureGold)) {
 			GoGold();
 		}

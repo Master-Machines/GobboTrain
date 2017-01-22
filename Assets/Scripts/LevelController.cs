@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -30,6 +31,9 @@ public class LevelController : MonoBehaviour {
 	public bool WallActive = false;
 	public ObstacleCreator ObstacleCreator;
 
+	public Image howToScreen;
+	public Button howToGo, howToBack;
+
 	// Use this for initialization
 	void Start () {
 		NextWallPosition += 1400;
@@ -56,6 +60,20 @@ public class LevelController : MonoBehaviour {
 			CreateNextPiece(true, false);
 		}
 		CheckForWalls();
+	}
+
+	public void HowToPlayButton()
+	{
+		howToScreen.gameObject.SetActive(true);
+		howToGo.gameObject.SetActive(false);
+		howToBack.gameObject.SetActive(true);
+	}
+
+	public void HowToBack()
+	{
+		howToScreen.gameObject.SetActive(false);
+		howToGo.gameObject.SetActive(true);
+		howToBack.gameObject.SetActive(false);
 	}
 
 	void CheckForWalls() {

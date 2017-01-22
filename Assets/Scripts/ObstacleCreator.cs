@@ -15,6 +15,7 @@ public class ObstacleCreator : MonoBehaviour {
 	public GameObject[] ObstaclePrefabs;
 	public GameObject PowerBoostPrefab;
 	public GameObject SpeedBoostPrefab;
+	public GameObject SpeedBoostShroomPrefab;
 	public GameObject GoblinPrefab;
 	public GameObject RunnerPrefab;
 
@@ -98,7 +99,7 @@ public class ObstacleCreator : MonoBehaviour {
 			if(selectedIndex >= ObstaclePrefabs.Length)
 				selectedIndex = ObstaclePrefabs.Length - 1;
 			
-			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition + Random.Range (-3.5f, 3.5f), transform.position.y, position), Quaternion.identity);
+			GameObject createdObj = (GameObject)Instantiate(ObstaclePrefabs[selectedIndex], new Vector3(CurrentRowPosition + Random.Range (-3.5f, 3.5f), transform.position.y, position), Quaternion.Euler(0, 0, 0));
 			createdObj.transform.SetParent(this.transform);
 			createdObj.GetComponent<Obstacle>().Player = PlayerController;
 		}
@@ -115,7 +116,9 @@ public class ObstacleCreator : MonoBehaviour {
 			createdObj = (GameObject)Instantiate(GoblinPrefab, spawnPosition, Quaternion.identity);
 			ChanceOfGoblin = .03f;
 		} else if(Random.Range(0f, 1f) < ChanceOfSpeed) {
-			createdObj = (GameObject)Instantiate(SpeedBoostPrefab, spawnPosition, Quaternion.identity);
+			int i = Random.Range(0, 100);
+			//if (i < 50) createdObj = (GameObject)Instantiate(SpeedBoostPrefab, spawnPosition, Quaternion.identity);
+			createdObj = (GameObject)Instantiate(SpeedBoostShroomPrefab, spawnPosition, Quaternion.identity);
 			ChanceOfSpeed = .03f;
 		}
 		if(createdObj != null) {

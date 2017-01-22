@@ -6,22 +6,30 @@ public class PowerController : MonoBehaviour {
 
 	public PlayerController Player;
 
-	public bool PowerupAvailable{get;set;}
+	public bool PowerupAvailable;
 	public GameObject PowerLight;
 	public Material GobboMat;
 	public Color PowerColor;
 
 	public enum PowerType {
 		Shockwave,
-		SpeedBoost
+		SpeedBoost,
+		AllGold,
+		NULL
 	}
 
-	public PowerType CurrentPower;
+
+	public PowerType CurrentPower = PowerType.NULL;
 
 	// Use this for initialization
 	void Start () {
+
 		EnablePowerup(false);
-		CurrentPower = PowerType.SpeedBoost;
+		PowerupAvailable = false;
+		PowerLight.SetActive(false);
+		if (Global.Instance.SelectedPowerup == -1) CurrentPower = PowerType.NULL;
+		else CurrentPower = (PowerType) Global.Instance.SelectedPowerup;
+		print(Global.Instance.SelectedPowerup);
 	}
 	
 	// Update is called once per frame
@@ -40,18 +48,25 @@ public class PowerController : MonoBehaviour {
 	}
 
 	public void EnablePowerup(bool enabled) {
-		PowerupAvailable = enabled;
-		PowerLight.SetActive(enabled);
-		if(PowerupAvailable) {
-			GobboMat.SetColor("_EmissionColor", PowerColor);
-		} else {
-			GobboMat.SetColor("_EmissionColor", Color.black);
+		if (CurrentPower == PowerType.AllGold || CurrentPower == PowerType.Shockwave || CurrentPower == PowerType.SpeedBoost)
+		{
+			print("Inside if");
+			PowerupAvailable = enabled;
+			PowerLight.SetActive(enabled);
+			if (PowerupAvailable && Global.Instance.SelectedPowerup != 0)
+			{
+				GobboMat.SetColor("_EmissionColor", PowerColor);
+			}
+			else
+			{
+				GobboMat.SetColor("_EmissionColor", new Color(0.1f, 0.1f, 0.1f));
+			}
 		}
 	}
 
 	IEnumerator Cooldown() {
 		yield return new WaitForSeconds(8f);
-		EnablePowerup(true);
+		if(PowerupAvailable) EnablePowerup(true);
 	}
 
 	void DoPowerup() {
@@ -59,6 +74,8 @@ public class PowerController : MonoBehaviour {
 			Player.Bomb();
 		} else if(CurrentPower == PowerType.SpeedBoost) {
 			Player.SpeedPower();
+		} else if (CurrentPower == PowerType.AllGold){
+			Player.AllGold();
 		}
 	}
 }

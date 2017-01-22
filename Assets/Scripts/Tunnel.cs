@@ -59,17 +59,31 @@ public class Tunnel : MonoBehaviour {
 	void CreateEnvironmentObject() {
 		Vector3 spawnPosition = GetRandomEdgePosition();
 		int selectedIndex = Random.Range(0, EnvironmentPrefabs.Length);
+		if (Random.Range(0, 100) < 50) selectedIndex = 1;
 		if(selectedIndex == 1 && Controller.Player.transform.position.x < Random.Range(0, 5000))
 			selectedIndex = 0;
-		GameObject obj = (GameObject)Instantiate(EnvironmentPrefabs[selectedIndex], spawnPosition, Quaternion.identity);
+		Quaternion rot = new Quaternion(0,0,0,0);
+		rot.eulerAngles = new Vector3(0, 167, 0);
+		GameObject obj = (GameObject)Instantiate(EnvironmentPrefabs[selectedIndex], spawnPosition, rot);
 		if(selectedIndex == 0) {
-			obj.transform.Rotate(new Vector3(0f, Random.Range(0f, 360f)));
+			if (spawnPosition.z < 0)
+			{
+				
+				obj.transform.Translate(new Vector3(0f, 0f, -.75f), Space.World);
+			}
+			else
+			{
+				obj.transform.GetComponentInChildren<Transform>().Rotate(0, 180, 0);
+				obj.transform.Translate(new Vector3(0f, 0f, .75f), Space.World);
+			}
+			//obj.transform.Rotate(new Vector3(0f, Random.Range(0f, 360f)));
 		} else {
 			// Goblin home
 			if(spawnPosition.z < 0) {
-				obj.transform.Rotate(new Vector3(0f, 180f));
+				
 				obj.transform.Translate(new Vector3(0f, 0f, -.75f), Space.World);
 			} else {
+				obj.transform.GetComponentInChildren<Transform>().Rotate(0, 180, 0);
 				obj.transform.Translate(new Vector3(0f, 0f, .75f), Space.World);
 			}
 		}

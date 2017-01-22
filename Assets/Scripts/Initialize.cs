@@ -12,7 +12,7 @@ public class Initialize : MonoBehaviour {
 			Initialized = true;
 			DialogGenerator.Init(oneOptionDialog, twoOptionDialog, threeOptionDialog);
 			Application.targetFrameRate = 60;
-			Global.Instance.Load();
+			//Global.Instance.Load();
 		}
 	}
 }

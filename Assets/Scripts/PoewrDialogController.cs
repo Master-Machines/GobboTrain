@@ -11,7 +11,6 @@ public class PoewrDialogController : MonoBehaviour {
 	public Button UpgradeButton;
 	public Button UseButton;
 
-
 	public Text Title;
 	public Text Description;
 
@@ -23,14 +22,6 @@ public class PoewrDialogController : MonoBehaviour {
 	private int CurrentPurchaseCost;
 	private bool CurrentIsAbility;
 	private int CurrentIndex;
-
-	void Start () {
-		Global.Instance.currency = 1000;
-	}
-
-	void Update () {
-	
-	}
 
 	public void Setup(int powerIndex, bool isAbility) {
 		CurrentIsAbility = isAbility;
@@ -74,22 +65,56 @@ public class PoewrDialogController : MonoBehaviour {
 		}
 
 		CurrentPurchaseCost = 0;
-		if(level == 0) {
+		UseButton.enabled = true;
+		UseButton.gameObject.SetActive(true);
+		if (level == 0)
+		{
 			// The powerup isn't unlocked!
+			print("Powerup not unlocked");
 			UpgradeButton.enabled = false;
-			UseButtonText.text = "Purchase  \n" + PurchaseCost + " c";
+			UseButtonText.text = "Purchase  " + PurchaseCost + " c";
 			CurrentPurchaseCost = PurchaseCost;
 			UpgradeButton.gameObject.SetActive(false);
-		} else if(level == 1) {
+		}
+		else if (level == 1 && isAbility)
+		{
+			print("Abilty level 1");
 			UpgradeButton.enabled = true;
-			UpgradeButtonText.text = "upgrade \n" + UpgradeCost + " c";
+			UpgradeButtonText.text = "upgrade " + UpgradeCost + " c";
 			UseButtonText.text = "use";
 			UpgradeButton.gameObject.SetActive(true);
-		} else {
+		}
+		else if (level == 1 && !isAbility)
+		{
+			print("Specialty level 1");
+			UpgradeButton.enabled = true;
+			UpgradeButtonText.text = "upgrade " + UpgradeCost + " c";
+			UseButton.enabled = false;
+			UseButton.gameObject.SetActive(false);
+			UpgradeButton.gameObject.SetActive(true);
+		}
+		else if(level == 2 && isAbility)
+		{
+			print("fully upgraded");
 			// User has the upgrade
 			UseButtonText.text = "use";
 			UpgradeButton.gameObject.SetActive(false);
 		}
+		else if	(level == 2 && !isAbility)
+        {
+			print("fully upgraded");
+			// User has the upgrade
+			UseButton.enabled = false;
+			UseButton.gameObject.SetActive(false);
+			//UseButtonText.text = "use";
+			UpgradeButton.gameObject.SetActive(false);
+		}
+
+		if(UpgradeButton.enabled == false)
+		{
+			UpgradeT.enabled = false;
+			UpgradeDescription.enabled = false;
+}
 	}
 
 	public void Use() {

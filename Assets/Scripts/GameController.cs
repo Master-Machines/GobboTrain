@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
 	public Text MultiplierDisplay;
 	public Text NewPointsDisplay;
 	public Text WallWarning;
+	public Image powerbar;
 
 	// Modifies the required momentum.
 	public const float DifficultyModifier = 1.5f;
@@ -23,10 +24,15 @@ public class GameController : MonoBehaviour {
 	public float TimePLayed = 0f;
 	public Button PauseButton;
 
+	public Sprite powerBarZero, powerBarFifty, powerBarSeventyFive, powerBarNinetyNine, powerBarFull;
+
 	public ObstacleCreator ObstacleCreator;
+
+	public GameObject EndGameCanvas;
 
 
 	void Start() {
+		Global.Instance.lastScore = 0;
 		Pause ();
 		HideUI(false);
 		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
@@ -65,12 +71,16 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		DialogGenerator.CreateCustomDialog("GameOverDialog", new Vector2(-1000, 0), (GameObject dialog)=>{
+		/*DialogGenerator.CreateCustomDialog("GameOverDialog", new Vector2(-1000, 0), (GameObject dialog)=>{
 			dialog.GetComponent<GameOverDialog>().Setup(this);
 			HideUI(false);
 		}, (int result)=>{
 			StartCoroutine(DelayedNewGame());
-		});
+		});*/
+
+		//EndGameCanvas.SetActive(true);
+		Global.Instance.lastScore = Score;
+		Application.LoadLevel(2);
 	}
 
 	void HideUI(bool show) {
@@ -81,6 +91,7 @@ public class GameController : MonoBehaviour {
 		WallWarning.gameObject.SetActive(false);
 		CurrencyDisplay.gameObject.SetActive(show);
 		PauseButton.gameObject.SetActive(show);
+		powerbar.gameObject.SetActive(show);
 	}
 
 	IEnumerator DelayedNewGame() {
@@ -114,7 +125,43 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateText();
+		UpdatePowerBar();
 		TimePLayed += Time.deltaTime;
+	}
+
+	// AUSTIN LOOK HERE
+	void UpdatePowerBar()
+	{
+		//PlayerController.DetermineMomentum();
+		//GameObject.Find("LevelController").GetComponent<LevelController>().WallHealth;
+		float powerBarPercent = (PlayerController.DetermineMomentum() / GameObject.Find("LevelController").GetComponent<LevelController>().WallHealth) * 100; 
+		if(powerBarPercent < 25)
+		{
+			//powerBarNull sprite
+			powerbar.sprite = powerBarZero;
+			powerbar.rectTransform.sizeDelta = new Vector2(powerBarPercent * 4, 40);
+		}else if(powerBarPercent < 50)
+		{
+			//powerball 25 sprite
+			powerbar.sprite = powerBarFifty;
+			powerbar.rectTransform.sizeDelta = new Vector2(powerBarPercent * 4, 40);
+		}else if(powerBarPercent < 75)
+		{
+			//powerbar 50 sprite
+			powerbar.sprite = powerBarSeventyFive;
+			powerbar.rectTransform.sizeDelta = new Vector2(powerBarPercent * 4, 40);
+		}else if(powerBarPercent < 100)
+		{
+			//powerbar 99 sprite
+			powerbar.sprite = powerBarNinetyNine;
+			powerbar.rectTransform.sizeDelta = new Vector2(powerBarPercent * 4, 40);
+		}else if(powerBarPercent >= 100)
+		{
+			//powerbar 100 sprite
+			powerbar.sprite = powerBarFull;
+			powerbar.rectTransform.sizeDelta = new Vector2(400, 40);
+		}
+		
 	}
 
 	void UpdateText() {

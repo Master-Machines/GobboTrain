@@ -25,6 +25,7 @@ public class ShopController : MonoBehaviour {
 	}
 
 	public void UpdateSelectedAbilities() {
+
 		int ability = Global.Instance.SelectedPowerup - 1;
 		int specialty = Global.Instance.SelectedSpecialty - 1;
 		foreach(Button abilityButton in AbilityButtons) {
