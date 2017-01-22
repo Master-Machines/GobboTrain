@@ -71,15 +71,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		/*DialogGenerator.CreateCustomDialog("GameOverDialog", new Vector2(-1000, 0), (GameObject dialog)=>{
-			dialog.GetComponent<GameOverDialog>().Setup(this);
-			HideUI(false);
-		}, (int result)=>{
-			StartCoroutine(DelayedNewGame());
-		});*/
-
-		//EndGameCanvas.SetActive(true);
+        Global.Instance.currency += SessionCurrency;
 		Global.Instance.lastScore = Score;
+        Global.Instance.SessionGold = SessionCurrency;
 		Application.LoadLevel(2);
 	}
 

@@ -8,6 +8,7 @@ public class Global {
 	public int currency = 0	;
 	public int highScore = 0;
 	public int lastScore { get; set; }
+    public int SessionGold { get; set; }
 	public bool isPaused = false;
 	public bool tiltEnabled = false;
 
