@@ -6,9 +6,15 @@ using System;
 public class StartGameDialog : DialogController {
 
 	public Text Total;
-
+    float hudHeight;
+    float hudWidth;
+    GameObject hudParent;
 	void Start() {
-		Total.text = Global.Instance.currency.ToString() + "c";
+        hudParent = GameObject.Find("HUD");
+        RectTransform hudRt = (RectTransform)hudParent.transform;
+        hudHeight = hudRt.rect.height;
+        hudWidth = hudRt.rect.width;
+        Total.text = Global.Instance.currency.ToString() + "c";
 	}
 
 	public void TiltControls(bool tiltEnabled) {
