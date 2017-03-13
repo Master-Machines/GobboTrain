@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 public class GameController : MonoBehaviour {
@@ -74,7 +75,7 @@ public class GameController : MonoBehaviour {
         Global.Instance.currency += SessionCurrency;
 		Global.Instance.lastScore = Score;
         Global.Instance.SessionGold = SessionCurrency;
-		Application.LoadLevel(2);
+		SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
 	}
 
 	void HideUI(bool show) {

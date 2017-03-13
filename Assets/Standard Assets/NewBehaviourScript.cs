@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class startScreenButtonController : MonoBehaviour {
+public class NewBehaviourScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +13,4 @@ public class startScreenButtonController : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    public void PlayButtonClicked()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
 }

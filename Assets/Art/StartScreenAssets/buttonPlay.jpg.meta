@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: 4181625dec576a643aa0182790a8d88f
-timeCreated: 1488941436
+guid: f2727ec6e04100e4a8555e43b99bd8a1
+timeCreated: 1489103666
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: play_button_unpressed
-    21300002: play_button_pressed
+    21300002: play_button_hover
+    21300004: play_button_pressed
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -97,6 +98,19 @@ TextureImporter:
     sprites:
     - serializedVersion: 2
       name: play_button_unpressed
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: play_button_hover
       rect:
         serializedVersion: 2
         x: 0

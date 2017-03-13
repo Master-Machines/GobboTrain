@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: c4436423f3946cd4da57dc0401a2c9d4
-timeCreated: 1488940902
+guid: f58040dde55289340945f0d9d8aa1724
+timeCreated: 1489102872
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: back_button_pressed
-    21300002: back_button_unpressed
+    21300000: back_button_unpressed
+    21300002: back_button_hover
+    21300004: back_button_pressed
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -97,6 +98,19 @@ TextureImporter:
     sprites:
     - serializedVersion: 2
       name: back_button_unpressed
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 256
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: back_button_hover
       rect:
         serializedVersion: 2
         x: 0
