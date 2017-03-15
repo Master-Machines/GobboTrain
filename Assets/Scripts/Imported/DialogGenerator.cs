@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class DialogGenerator : MonoBehaviour{
+/*public class DialogGenerator : MonoBehaviour{
 	private static GameObject OneOptionPrefab;
 	private static GameObject TwoOptionPrefab;
 	private static GameObject ThreeOptionPrefab;
@@ -37,4 +37,4 @@ public class DialogGenerator : MonoBehaviour{
 			creationCallback(obj);
 		obj.GetComponent<DialogController>().Show(resultCallback);
 	}
-}
+}*/

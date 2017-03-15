@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Initialize : MonoBehaviour {
-	public static bool Initialized = false;
-	public GameObject oneOptionDialog;
+	public static bool Initialized = true;
+	/*public GameObject oneOptionDialog;
 	public GameObject twoOptionDialog;
 	public GameObject threeOptionDialog;
 
@@ -14,5 +14,5 @@ public class Initialize : MonoBehaviour {
 			Application.targetFrameRate = 60;
 			//Global.Instance.Load();
 		}
-	}
+	}*/
 }

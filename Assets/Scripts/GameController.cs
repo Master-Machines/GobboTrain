@@ -34,12 +34,12 @@ public class GameController : MonoBehaviour {
 
 	void Start() {
 		Global.Instance.lastScore = 0;
-		Pause ();
+		/*Pause ();
 		HideUI(false);
 		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
 			UnPause();
 			HideUI (true);
-		});
+		});*/
 	}
 
 	public void IncreaseCurrency(int amount) {
@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
 	public void GameOver() {
         Global.Instance.currency += SessionCurrency;
 		Global.Instance.lastScore = Score;
-        Global.Instance.SessionGold = SessionCurrency;
+        //Global.Instance.SessionGold = SessionCurrency;
 		SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
 	}
 
