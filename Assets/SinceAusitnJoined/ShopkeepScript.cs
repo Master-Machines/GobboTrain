@@ -7,7 +7,7 @@ public class ShopkeepScript : MonoBehaviour {
 	float time;
 	// Use this for initialization
 	void Start () {
-		//gameObject.GetComponent<Animation>().Play("Idle");
+		gameObject.GetComponent<Animation>().Play("Idle");
 		Time.timeScale = 1.0f;
 		Debug.Log(Time.timeScale);
 	}

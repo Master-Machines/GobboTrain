@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
 	public void GameOver() {
         Global.Instance.currency += SessionCurrency;
 		Global.Instance.lastScore = Score;
-        //Global.Instance.SessionGold = SessionCurrency;
+        Global.Instance.SessionGold = SessionCurrency;
 		SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
 	}
 
