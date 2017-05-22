@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PoewrDialogController : MonoBehaviour {
 	public const int PurchaseCost = 100;
 	public const int UpgradeCost = 500;
+    public int TotalCurrency;
 
 	public Text UpgradeButtonText;
 	public Text UseButtonText;
@@ -24,6 +25,7 @@ public class PoewrDialogController : MonoBehaviour {
 	private int CurrentIndex;
 
 	public void Setup(int powerIndex, bool isAbility) {
+        TotalCurrency = PlayerPrefs.GetInt("currencyPrefs");
 		CurrentIsAbility = isAbility;
 		CurrentIndex = powerIndex;
 		int level = 0;

@@ -17,7 +17,7 @@ public class GameOverDialog : DialogController {
 		int time = (int)GameController.TimePLayed;
 		TimeSpan timeSpan = TimeSpan.FromSeconds((double)time);
 		Score.text = string.Format("{0:#,##0}", GameController.Score); 
-		CurrencyDisplay.text = "" + GameController.SessionCurrency.ToString() + " c";
+		CurrencyDisplay.text = "" + GameController.SessionCurrency.ToString() + " G";
 		Global.Instance.currency += GameController.SessionCurrency;
 		if(Global.Instance.highScore < GameController.Score) {
 			Global.Instance.highScore = GameController.Score;

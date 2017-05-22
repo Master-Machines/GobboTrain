@@ -15,10 +15,14 @@ public class ShopController : MonoBehaviour {
 	public ColorBlock StandardColor;
 
 	public Text CurrencyDisplay;
+    public int TotalCurrency;
+    public int SessionCurrency;
 
 	void Start () {
 		UpdateSelectedAbilities();
-	}
+        TotalCurrency = PlayerPrefs.GetInt("currencyPref");
+        CurrencyDisplay.text = TotalCurrency.ToString() + " G";
+    }
 
 	void Update () {
 	
@@ -39,9 +43,9 @@ public class ShopController : MonoBehaviour {
 			AbilityButtons[ability].colors = SelectedColor;
 		if(specialty > -1)
 			SpecialtyButtons[specialty].colors = SelectedColor;
-
-		CurrencyDisplay.text = Global.Instance.currency + " c";
 	}
+
+
 
 	public void AbilitySelected(int index) {
 		PowerDialog.gameObject.SetActive(true);
@@ -54,6 +58,8 @@ public class ShopController : MonoBehaviour {
 	}
 
 	public void Leave() {
+        PlayerPrefs.SetInt("currencyPref", TotalCurrency);
+        SessionCurrency = 0;
 		Application.LoadLevel("GameScene");
 	}
 }
