@@ -31,6 +31,11 @@ public class Global {
 	
 	public static Global Instance = new Global();
 	private static bool loaded = false;
+
+    public Global()
+    {
+        Instance.Init();
+    }
 	
 	public void Init() {
 		if(!loaded) {
