@@ -16,7 +16,7 @@ public class Global {
 	public int SelectedSpecialty = 3;
 
 	// shockwave 
-	public int Powerup1Level = 0;
+	public int Powerup1Level = 1;
 	// boost
 	public int Powerup2Level = 0;
 	// goldrush

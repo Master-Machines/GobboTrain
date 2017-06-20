@@ -14,7 +14,7 @@ public class Obstacle : MonoBehaviour {
 	public GameObject GoldParticles;
 	public PlayerController Player {get;set;}
 	public GameObject ExplosionParticles;
-	private float GoldChance = 0.07f;
+	private float GoldChance = 0.05f;
 	public static bool PureGold = false;
 
 	// Use this for initialization
