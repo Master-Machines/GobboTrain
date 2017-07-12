@@ -6,13 +6,13 @@ using System.Reflection;
 public class Global {
 
 	public int currency = 0	;
-	public int highScore = 0;
-	public int lastScore { get; set; }
+    public int highScore = 0;
+    public int lastScore { get; set; }
     public int SessionGold { get; set; }
 	public bool isPaused = false;
 	public bool tiltEnabled = false;
 
-	public int SelectedPowerup = 3;
+	public int SelectedPowerup = 0;
 	public int SelectedSpecialty = 3;
 
 	// shockwave 
@@ -32,10 +32,6 @@ public class Global {
 	public static Global Instance = new Global();
 	private static bool loaded = false;
 
-    public Global()
-    {
-        Instance.Init();
-    }
 	
 	public void Init() {
 		if(!loaded) {
@@ -59,6 +55,7 @@ public class Global {
 			} else if(f.FieldType == typeof(System.Single)){
 				PlayerPrefs.SetFloat(f.Name, (float)f.GetValue(Instance));
 			}
+            PlayerPrefs.Save();
 		}
 	}
 	

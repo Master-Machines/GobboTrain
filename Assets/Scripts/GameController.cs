@@ -34,20 +34,21 @@ public class GameController : MonoBehaviour {
 
 	void Start() {
 		Global.Instance.lastScore = 0;
-		/*Pause ();
+        CurrencyDisplay.text = "Best Run: " + Global.Instance.highScore;
+        /*Pause ();
 		HideUI(false);
 		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
 			UnPause();
 			HideUI (true);
 		});*/
-	}
+    }
 
 	public void IncreaseCurrency(int amount) {
-		SessionCurrency += amount;
-		CurrencyDisplay.text = SessionCurrency.ToString() + " G"; 
+        /*SessionCurrency += amount;
+        CurrencyDisplay.text = "High Score: " + Global.Instance.highScore; 
 		NewPointsDisplay.text = "+" + (amount).ToString() + " G";
 		CancelInvoke("HideNewPoints");
-		Invoke ("HideNewPoints", .5f);
+		Invoke ("HideNewPoints", .5f);*/
 	}
 
 	public void IncreaseScore(int amount) {
@@ -75,6 +76,11 @@ public class GameController : MonoBehaviour {
         Global.Instance.currency += SessionCurrency;
 		Global.Instance.lastScore = Score;
         Global.Instance.SessionGold = SessionCurrency;
+        if (Global.Instance.highScore<Score)
+            {
+            Global.Instance.highScore = Score;
+            }
+        Global.Instance.Save();
 		SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
 	}
 

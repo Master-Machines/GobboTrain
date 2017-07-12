@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour {
 					speedModifer = .25f;
 
 				if(obstacle.IsGold)
-					GameController.IncreaseCurrency(obstacle.CurrencyBonus);
+					GameController.IncreaseMultiplier();
 				// GameController.IncreaseScore((int)Mathf.Pow (obstacle.RequiredMomentum, 1.5f));
 				if(other.gameObject.CompareTag("Wall")) {
 					GameController.IncreaseMultiplier();
