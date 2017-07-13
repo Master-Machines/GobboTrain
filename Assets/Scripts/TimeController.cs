@@ -7,8 +7,8 @@ public class TimeController : MonoBehaviour {
 	public static float EnterSlowMotionPosition;
 	public static bool WallDestroyed = false;
 
-	private bool enteringSlowMo = false;
-	private bool exitingSlowMo = false;
+	public static bool enteringSlowMo = false;
+	public static bool exitingSlowMo = false;
 	public const float timeToFast = .4f;
 	public const float timeToSlow = .25f;
 	public const float slowScale = .1f;

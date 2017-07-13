@@ -5,7 +5,9 @@ public class PlayerController : MonoBehaviour {
 	private float Speed = 0f;
 	private float BonusSpeed = 0f;
 
-	public AudioClip gobboSmashSmall, gobboSmashMed, gobboSmash, gobboOnGobbo, footHit;
+    public AudioClip smallrock, mediumrock, largerock, speedPowerup, wall, barricade, gobboOnGobbo, shockwave;
+    public AudioSource normal;
+    public AudioSource slowMo;
 	public AudioSource soundSource;
 
 	public const float LeftLanePosition = 5f;
@@ -73,6 +75,9 @@ public class PlayerController : MonoBehaviour {
 		Speed = 10f;
 		CurrentLane = Lane.Middle;
 		SwipeDetector.SwipeEvents.Add(SwipeHappened);
+        normal.Play();
+        slowMo.Play();
+        slowMo.Pause();
 	}
 	
 	// Update is called once per frame
@@ -85,9 +90,20 @@ public class PlayerController : MonoBehaviour {
 			if(Input.GetButtonDown("Jump") && Bombs-- > 0) {
 				PowerController.AttemptPower();
 			}
+            if(TimeController.enteringSlowMo)
+            {
+                normal.Pause();
+                slowMo.UnPause();
+            }
+            if (TimeController.exitingSlowMo)
+            {
+                normal.UnPause();
+                slowMo.Pause();
+            }
 		}
 	}
 
+   
 	void UpdateSpeed(bool on) {
 		if(Speed < ModerateSpeed) { // HERE IS WHERE RUNNER CLASS IS USED
 			Speed += (Time.deltaTime * 10f + (Global.Instance.Specialty3Level * 0.2f));
@@ -274,45 +290,45 @@ public class PlayerController : MonoBehaviour {
 			{
 				// Small
 				case "obstacle_barricade(Clone)":
-					soundSource.PlayOneShot(gobboSmashSmall);
+					soundSource.PlayOneShot(barricade);
 					break;
 				case "obstacle_block(Clone)":
-					soundSource.PlayOneShot(gobboSmashSmall);
+					soundSource.PlayOneShot(mediumrock);
 					break;
 				case "obstacle_rockSmall(Clone)":
-					soundSource.PlayOneShot(gobboSmashSmall);
+					soundSource.PlayOneShot(smallrock);
 					break;
 				case "obstacle_stalagmite(Clone)":
-					soundSource.PlayOneShot(gobboSmashSmall);
+					soundSource.PlayOneShot(smallrock);
 					break;
 				// Medium
 				case "obstacle_block_mega(Clone)":
-					soundSource.PlayOneShot(gobboSmashMed);
+					soundSource.PlayOneShot(wall);
 					break;
 				case "obstacle_hut(Clone)":
-					soundSource.PlayOneShot(gobboSmashMed);
+					soundSource.PlayOneShot(largerock);
 					break;
 				case "obstacle_rockMedium(Clone)":
-					soundSource.PlayOneShot(gobboSmashMed);
+					soundSource.PlayOneShot(mediumrock);
 					break;
 				case "obstacle_stalagmite_column(Clone)":
-					soundSource.PlayOneShot(gobboSmashMed);
+					soundSource.PlayOneShot(mediumrock);
 					break;
 				// Large
 				case "obstacle_rockLarge(Clone)":
-					soundSource.PlayOneShot(gobboSmash);
+					soundSource.PlayOneShot(largerock);
 					break;
 				case "obstacle_stalagmite_column_giant(Clone)":
-					soundSource.PlayOneShot(gobboSmash);
+					soundSource.PlayOneShot(largerock);
 					break;
 				case "Wall one(Clone)":
-					soundSource.PlayOneShot(gobboSmash);
+					soundSource.PlayOneShot(wall);
 					break;
 				case "Wall two(Clone)":
-					soundSource.PlayOneShot(gobboSmash);
+					soundSource.PlayOneShot(wall);
 					break;
 				case "Wall three(Clone)":
-					soundSource.PlayOneShot(gobboSmash);
+					soundSource.PlayOneShot(wall);
 					break;
 			}
 
@@ -359,7 +375,7 @@ public class PlayerController : MonoBehaviour {
 			Destroy(other.gameObject);
 		} else if(other.gameObject.CompareTag("SpeedPowerup")) {
 			//BonusSpeed += SpeedBoostBonus;
-			soundSource.PlayOneShot(gobboOnGobbo);
+			soundSource.PlayOneShot(speedPowerup);
 			SpeedBoost();
 			//Speed *= .9f;
 			Destroy(other.gameObject);
@@ -367,7 +383,7 @@ public class PlayerController : MonoBehaviour {
 			obj.transform.parent = transform;
 		} else if(other.gameObject.CompareTag("PowerBoost")) {
 			//MomentumBonuses--;
-			soundSource.PlayOneShot(gobboOnGobbo);
+			soundSource.PlayOneShot(speedPowerup);
 			//GameController.HighlightPower(false);
 			MomentumBonuses ++;
 			Destroy(other.gameObject);
@@ -406,6 +422,7 @@ public class PlayerController : MonoBehaviour {
 			if(Vector3.Distance(transform.position, obj.transform.position) < BombDistance) {
 				Obstacle ob = obj.GetComponent<Obstacle>();
 				ob.Break();
+                soundSource.PlayOneShot(shockwave);
 			}
 		}
 	}
