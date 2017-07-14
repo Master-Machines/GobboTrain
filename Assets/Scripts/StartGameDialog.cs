@@ -15,8 +15,7 @@ public class StartGameDialog : DialogController {
         hudHeight = hudRt.rect.height;
         hudWidth = hudRt.rect.width;
         Total.text = Global.Instance.currency.ToString() + "c";
-        Global.Instance.Load();
-    }
+	}
 
 	public void TiltControls(bool tiltEnabled) {
 		Global.Instance.tiltEnabled = tiltEnabled;
