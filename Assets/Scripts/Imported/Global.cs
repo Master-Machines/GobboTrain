@@ -6,7 +6,7 @@ using System.Reflection;
 public class Global {
 
 	public int currency = 0	;
-    public int highScore = 0;
+    public int highScore { get; set; }
     public int lastScore { get; set; }
     public int SessionGold { get; set; }
 	public bool isPaused = false;
@@ -45,26 +45,25 @@ public class Global {
 	public void Save() {
 		FieldInfo[] props = Instance.GetType().GetFields(flags);
 		foreach (FieldInfo f in props) {
-			if(f.FieldType == typeof(System.Int32)) {
-				PlayerPrefs.SetInt(f.Name, (int)f.GetValue(Instance));
-			} else if(f.FieldType == typeof(System.Boolean)) {
+			if(f.FieldType == typeof(int)) {
+				PlayerPrefs.SetInt(f.Name,(int) f.GetValue(Instance));
+			} /*else if(f.FieldType == typeof(System.Boolean)) {
 				// if false, save 0, otherwise save 1
 				PlayerPrefs.SetInt(f.Name, (bool)f.GetValue(Instance) ? 1 : 0);
 			} else if(f.FieldType == typeof(System.String)) {
 				PlayerPrefs.SetString(f.Name, f.GetValue(Instance).ToString());
 			} else if(f.FieldType == typeof(System.Single)){
 				PlayerPrefs.SetFloat(f.Name, (float)f.GetValue(Instance));
-			}
-            PlayerPrefs.Save();
+			}*/
 		}
 	}
 	
 	public void Load() {
 		FieldInfo[] props = Instance.GetType().GetFields(flags);
 		foreach (FieldInfo f in props) {
-			if(f.FieldType == typeof(System.Int32)) {
-				f.SetValue(Instance, PlayerPrefs.GetInt(f.Name));
-			} else if(f.FieldType == typeof(System.Boolean)) {
+			if(f.FieldType == typeof(int)) {
+				f.SetValue(PlayerPrefs.GetInt(f.Name), Instance);
+			} /*else if(f.FieldType == typeof(System.Boolean)) {
 				// if false, save 0, otherwise save 1
 				int b = PlayerPrefs.GetInt(f.Name);
 				f.SetValue(Instance, (b == 1) ? true : false);
@@ -72,7 +71,7 @@ public class Global {
 				f.SetValue(Instance, PlayerPrefs.GetString(f.Name));
 			} else if(f.FieldType == typeof(System.Single)){
 				f.SetValue(Instance, PlayerPrefs.GetFloat(f.Name));
-			}
+			}*/
 		}
 	}
 

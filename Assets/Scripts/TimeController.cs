@@ -7,6 +7,7 @@ public class TimeController : MonoBehaviour {
 	public static float EnterSlowMotionPosition;
 	public static bool WallDestroyed = false;
 
+
 	public static bool enteringSlowMo = false;
 	public static bool exitingSlowMo = false;
 	public const float timeToFast = .4f;
@@ -17,11 +18,13 @@ public class TimeController : MonoBehaviour {
 	public PlayerController Player;
 	public Text PauseButtonText;
 	public LevelController LevelController;
+    
 
 	public Button howTo;
 
 	void Awake() {
 		EnterSlowMotionPosition = 999999999f;
+        ExitSlowMotion();
 	}
 
 	// Update is called once per frame

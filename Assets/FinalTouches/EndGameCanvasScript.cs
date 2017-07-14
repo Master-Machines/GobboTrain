@@ -6,7 +6,7 @@ public class EndGameCanvasScript : MonoBehaviour {
 
 	public Text scoreText;
     public Text goldText;
-    public Text newHighScore;
+    public Image newHighScore;
 
     private GameController GameController;
 
@@ -14,16 +14,10 @@ public class EndGameCanvasScript : MonoBehaviour {
 	void Start () {
 		scoreText.text = "Last Run: " + Global.Instance.lastScore;
         goldText.text = Global.Instance.highScore + " :Best Run";
-        newHighScore.text = "";
-
-
-    }
-
-    public void newHighness()
-    {
-        if (GameController.Score == Global.Instance.highScore)
+        newHighScore.enabled = false;
+        if(Global.Instance.lastScore == Global.Instance.highScore)
         {
-            newHighScore.text = "NEW HIGH SCORE!!!!";
+            newHighScore.enabled = true;
         }
     }
     

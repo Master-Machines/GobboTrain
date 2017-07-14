@@ -126,12 +126,12 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateText();
-		UpdatePowerBar();
+		/*UpdatePowerBar();*/
 		TimePLayed += Time.deltaTime;
 	}
 
 	// AUSTIN LOOK HERE
-	void UpdatePowerBar()
+	/*void UpdatePowerBar()
 	{
 		//PlayerController.DetermineMomentum();
 		//GameObject.Find("LevelController").GetComponent<LevelController>().WallHealth;
@@ -163,7 +163,7 @@ public class GameController : MonoBehaviour {
 			powerbar.rectTransform.sizeDelta = new Vector2(400, 40);
 		}
 		
-	}
+	}*/
 
 	void UpdateText() {
 		float power = 10f + (float)PlayerController.MomentumBonuses + (10f * (float)PlayerController.CurrentGoblins * PlayerController.GoblinPowerBonus);
