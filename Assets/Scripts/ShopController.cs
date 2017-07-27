@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -60,4 +60,4 @@ public class ShopController : MonoBehaviour {
 	public void Leave() {
 		Application.LoadLevel("GameScene");
 	}
-}
+}*/

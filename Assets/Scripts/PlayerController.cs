@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour {
 	private float Speed = 0f;
 	private float BonusSpeed = 0f;
 
-    public AudioClip smallrock, mediumrock, largerock, speedPowerup, wall, barricade, gobboOnGobbo, shockwave;
+    public AudioClip smallrock, mediumrock, largerock, speedPowerup, wall, barricade, gobboOnGobbo, shockwave, scream;
     public AudioSource normal;
     public AudioSource slowMo;
 	public AudioSource soundSource;
@@ -392,6 +392,7 @@ public class PlayerController : MonoBehaviour {
 		} else if(other.gameObject.CompareTag("Runner")) {
 			other.gameObject.GetComponent<RunningGobbo>().Death(transform);
 			soundSource.PlayOneShot(gobboOnGobbo);
+            soundSource.PlayOneShot(scream);
 			PowerController.EnablePowerup(true);
 			GameController.IncreaseScore(10);
 		}

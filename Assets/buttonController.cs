@@ -8,7 +8,6 @@ public class buttonController : MonoBehaviour {
     public void playButton(string levelName)
     {
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
-
     }
 
     public void howToButton(string levelName)

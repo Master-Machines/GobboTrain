@@ -9,7 +9,7 @@ public class PowerController : MonoBehaviour {
 	public bool PowerupAvailable;
 	public GameObject PowerLight;
 	public Material GobboMat;
-	public Color PowerColor;
+	/*public Color PowerColor;*/
 
 	public enum PowerType {
 		Shockwave,
@@ -21,8 +21,13 @@ public class PowerController : MonoBehaviour {
 
 	public PowerType CurrentPower = PowerType.NULL;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        GobboMat.DisableKeyword("_EMISSION");
+    }
+
+    // Use this for initialization
+    void Start () {
 
 		EnablePowerup(false);
 		PowerupAvailable = false;
@@ -53,13 +58,13 @@ public class PowerController : MonoBehaviour {
 			print("Inside if");
 			PowerupAvailable = enabled;
 			PowerLight.SetActive(enabled);
-			if (PowerupAvailable && Global.Instance.SelectedPowerup != 0)
+			if (PowerupAvailable && Global.Instance.SelectedPowerup == 0)
 			{
-				GobboMat.SetColor("_EmissionColor", PowerColor);
+                GobboMat.EnableKeyword("_EMISSION");
 			}
 			else
 			{
-				GobboMat.SetColor("_EmissionColor", new Color(0.1f, 0.1f, 0.1f));
+                GobboMat.DisableKeyword("_EMISSION");
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System;
@@ -29,4 +29,4 @@ public class StartGameDialog : DialogController {
 	public void GoToShop() {
 		Application.LoadLevel("Store");
 	}
-}
+}*/

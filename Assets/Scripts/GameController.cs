@@ -31,8 +31,12 @@ public class GameController : MonoBehaviour {
 
 	public GameObject EndGameCanvas;
 
+    private void Awake()
+    {
+        Global.Instance.highScore = PlayerPrefs.GetInt("highScore");
+    }
 
-	void Start() {
+    void Start() {
 		Global.Instance.lastScore = 0;
         CurrencyDisplay.text = "Best Run: " + Global.Instance.highScore;
         /*Pause ();
@@ -73,9 +77,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver() {
-        Global.Instance.currency += SessionCurrency;
 		Global.Instance.lastScore = Score;
-        Global.Instance.SessionGold = SessionCurrency;
         if (Global.Instance.highScore<Score)
             {
             Global.Instance.highScore = Score;

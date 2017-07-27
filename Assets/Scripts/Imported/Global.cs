@@ -5,15 +5,15 @@ using System.Reflection;
 // Variables that are persisted
 public class Global {
 
-	public int currency = 0	;
-    public int highScore { get; set; }
+	/*public int currency = 0	;*/
+    public int highScore = 0; 
     public int lastScore { get; set; }
-    public int SessionGold { get; set; }
+    /*public int SessionGold { get; set; }
 	public bool isPaused = false;
-	public bool tiltEnabled = false;
+	public bool tiltEnabled = false;*/
 
 	public int SelectedPowerup = 0;
-	public int SelectedSpecialty = 3;
+	/*public int SelectedSpecialty = 3;*/
 
 	// shockwave 
 	public int Powerup1Level = 1;
@@ -35,8 +35,8 @@ public class Global {
 	
 	public void Init() {
 		if(!loaded) {
-			Instance.Load();
 			loaded = true;
+           
 		}
 	}
 
@@ -47,6 +47,7 @@ public class Global {
 		foreach (FieldInfo f in props) {
 			if(f.FieldType == typeof(int)) {
 				PlayerPrefs.SetInt(f.Name,(int) f.GetValue(Instance));
+                PlayerPrefs.Save();
 			} /*else if(f.FieldType == typeof(System.Boolean)) {
 				// if false, save 0, otherwise save 1
 				PlayerPrefs.SetInt(f.Name, (bool)f.GetValue(Instance) ? 1 : 0);
@@ -58,11 +59,11 @@ public class Global {
 		}
 	}
 	
-	public void Load() {
+	/*public void Load() {
 		FieldInfo[] props = Instance.GetType().GetFields(flags);
 		foreach (FieldInfo f in props) {
 			if(f.FieldType == typeof(int)) {
-				f.SetValue(PlayerPrefs.GetInt(f.Name), Instance);
+                f.SetValue(PlayerPrefs.GetInt(f.Name), Instance);
 			} /*else if(f.FieldType == typeof(System.Boolean)) {
 				// if false, save 0, otherwise save 1
 				int b = PlayerPrefs.GetInt(f.Name);
@@ -71,9 +72,9 @@ public class Global {
 				f.SetValue(Instance, PlayerPrefs.GetString(f.Name));
 			} else if(f.FieldType == typeof(System.Single)){
 				f.SetValue(Instance, PlayerPrefs.GetFloat(f.Name));
-			}*/
+			}
 		}
-	}
+	}*/
 
 	
 }
