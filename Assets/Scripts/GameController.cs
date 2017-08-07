@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour {
 
     void Start() {
 		Global.Instance.lastScore = 0;
-        CurrencyDisplay.text = "Best Run: " + Global.Instance.highScore;
+        CurrencyDisplay.text = ""+Global.Instance.highScore;
         /*Pause ();
 		HideUI(false);
 		DialogGenerator.CreateCustomDialog("StartGameDialog", new Vector2(0f, 1200f), null, (int result)=> {
